@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsInvestIssueObjectMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsInvestIssueObject">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_type" jdbcType="VARCHAR" property="orgType" />
+    <result column="org_nature" jdbcType="VARCHAR" property="orgNature" />
+    <result column="subscription_price" jdbcType="VARCHAR" property="subscriptionPrice" />
+    <result column="subscription_number" jdbcType="VARCHAR" property="subscriptionNumber" />
+    <result column="stock_holding_date" jdbcType="VARCHAR" property="stockHoldingDate" />
+  </resultMap>
+</mapper>

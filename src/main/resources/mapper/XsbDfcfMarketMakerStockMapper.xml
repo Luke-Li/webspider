@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbDfcfMarketMakerStockMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbDfcfMarketMakerStock">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="maker_name" jdbcType="VARCHAR" property="makerName" />
+    <result column="maker_type" jdbcType="VARCHAR" property="makerType" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="stock_stock" jdbcType="VARCHAR" property="stockStock" />
+    <result column="equity_ratio" jdbcType="VARCHAR" property="equityRatio" />
+    <result column="capital_source" jdbcType="VARCHAR" property="capitalSource" />
+    <result column="cost_price" jdbcType="VARCHAR" property="costPrice" />
+  </resultMap>
+</mapper>

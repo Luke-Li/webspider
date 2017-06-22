@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbHxEquityStructurePersonMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbHxEquityStructurePerson">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="shareholders_number" jdbcType="INTEGER" property="shareholdersNumber" />
+    <result column="shareholders_number_previous_change" jdbcType="DECIMAL" property="shareholdersNumberPreviousChange" />
+    <result column="per_capita_tradable_shares" jdbcType="DECIMAL" property="perCapitaTradableShares" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbHxAssetLiabilityMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbHxAssetLiability">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="monetary_funds" jdbcType="DECIMAL" property="monetaryFunds" />
+    <result column="transactional_financial_assets" jdbcType="DECIMAL" property="transactionalFinancialAssets" />
+    <result column="can_sell_financial_assets" jdbcType="DECIMAL" property="canSellFinancialAssets" />
+    <result column="fixed_assets" jdbcType="DECIMAL" property="fixedAssets" />
+    <result column="intangible_assets" jdbcType="DECIMAL" property="intangibleAssets" />
+    <result column="long_term_equity_investment" jdbcType="DECIMAL" property="longTermEquityInvestment" />
+    <result column="total_assets" jdbcType="DECIMAL" property="totalAssets" />
+    <result column="interest_payable" jdbcType="DECIMAL" property="interestPayable" />
+    <result column="handle_employee_compensation" jdbcType="DECIMAL" property="handleEmployeeCompensation" />
+    <result column="other_liabilities" jdbcType="DECIMAL" property="otherLiabilities" />
+    <result column="total_liabilities" jdbcType="DECIMAL" property="totalLiabilities" />
+    <result column="undistributed_profit" jdbcType="DECIMAL" property="undistributedProfit" />
+    <result column="parent_company_shareholders_equity" jdbcType="DECIMAL" property="parentCompanyShareholdersEquity" />
+    <result column="minority_shareholders_rights_interests" jdbcType="DECIMAL" property="minorityShareholdersRightsInterests" />
+    <result column="Shareholders_equity_combined" jdbcType="DECIMAL" property="shareholdersEquityCombined" />
+    <result column="asset_liability_ratio" jdbcType="DECIMAL" property="assetLiabilityRatio" />
+  </resultMap>
+</mapper>

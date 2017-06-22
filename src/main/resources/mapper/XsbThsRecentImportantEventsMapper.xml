@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsRecentImportantEventsMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsRecentImportantEvents">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="event_url" jdbcType="VARCHAR" property="eventUrl" />
+    <result column="event_description" jdbcType="LONGVARCHAR" property="eventDescription" />
+  </resultMap>
+</mapper>

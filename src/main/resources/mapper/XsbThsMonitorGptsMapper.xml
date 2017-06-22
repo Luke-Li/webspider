@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsMonitorGptsMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsMonitorGpts">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="latest_price" jdbcType="VARCHAR" property="latestPrice" />
+    <result column="market_value" jdbcType="VARCHAR" property="marketValue" />
+    <result column="transfer_mode" jdbcType="VARCHAR" property="transferMode" />
+    <result column="sponsored_broker" jdbcType="VARCHAR" property="sponsoredBroker" />
+    <result column="tradable_capital" jdbcType="VARCHAR" property="tradableCapital" />
+    <result column="share_capital" jdbcType="VARCHAR" property="shareCapital" />
+    <result column="owned_industry" jdbcType="VARCHAR" property="ownedIndustry" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+  </resultMap>
+</mapper>

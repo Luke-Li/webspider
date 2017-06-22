@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsHoldingCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsHoldingCompany">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="affiliates_name" jdbcType="VARCHAR" property="affiliatesName" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="proportion" jdbcType="VARCHAR" property="proportion" />
+    <result column="investment_amount" jdbcType="VARCHAR" property="investmentAmount" />
+    <result column="byshares_com_net_profit" jdbcType="VARCHAR" property="bysharesComNetProfit" />
+    <result column="is_merger_report" jdbcType="VARCHAR" property="isMergerReport" />
+    <result column="byshares_com_main_business" jdbcType="VARCHAR" property="bysharesComMainBusiness" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

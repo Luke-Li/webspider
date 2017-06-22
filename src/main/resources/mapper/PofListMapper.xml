@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.PofListMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.PofList">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="artificialPersonName" jdbcType="VARCHAR" property="artificialpersonname" />
+    <result column="establishDate" jdbcType="BIGINT" property="establishdate" />
+    <result column="fundCount" jdbcType="INTEGER" property="fundcount" />
+    <result column="fundScale" jdbcType="DOUBLE" property="fundscale" />
+    <result column="hasCreditTips" jdbcType="BIT" property="hascredittips" />
+    <result column="hasSpecialTips" jdbcType="BIT" property="hasspecialtips" />
+    <result column="siteId" jdbcType="VARCHAR" property="siteid" />
+    <result column="inBlacklist" jdbcType="BIT" property="inblacklist" />
+    <result column="managerHasProduct" jdbcType="VARCHAR" property="managerhasproduct" />
+    <result column="managerName" jdbcType="VARCHAR" property="managername" />
+    <result column="officeAddress" jdbcType="VARCHAR" property="officeaddress" />
+    <result column="officeCity" jdbcType="VARCHAR" property="officecity" />
+    <result column="officeCoordinate" jdbcType="VARCHAR" property="officecoordinate" />
+    <result column="officeProvince" jdbcType="VARCHAR" property="officeprovince" />
+    <result column="primaryInvestType" jdbcType="VARCHAR" property="primaryinvesttype" />
+    <result column="regAdrAgg" jdbcType="VARCHAR" property="regadragg" />
+    <result column="regCoordinate" jdbcType="VARCHAR" property="regcoordinate" />
+    <result column="registerAddress" jdbcType="VARCHAR" property="registeraddress" />
+    <result column="registerCity" jdbcType="VARCHAR" property="registercity" />
+    <result column="registerDate" jdbcType="BIGINT" property="registerdate" />
+    <result column="registerNo" jdbcType="VARCHAR" property="registerno" />
+    <result column="registerProvince" jdbcType="VARCHAR" property="registerprovince" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+</mapper>

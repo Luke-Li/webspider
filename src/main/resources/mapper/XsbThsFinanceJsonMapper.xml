@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsFinanceJsonMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsFinanceJson">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="main" jdbcType="LONGVARCHAR" property="main" />
+    <result column="debt" jdbcType="LONGVARCHAR" property="debt" />
+    <result column="benefit" jdbcType="LONGVARCHAR" property="benefit" />
+    <result column="cash" jdbcType="LONGVARCHAR" property="cash" />
+  </resultMap>
+</mapper>

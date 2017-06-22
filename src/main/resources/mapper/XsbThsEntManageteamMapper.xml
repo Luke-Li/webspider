@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsEntManageteamMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsEntManageteam">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="position_type" jdbcType="VARCHAR" property="positionType" />
+    <result column="personagename" jdbcType="VARCHAR" property="personagename" />
+    <result column="leaveoffice" jdbcType="INTEGER" property="leaveoffice" />
+    <result column="report_date" jdbcType="VARCHAR" property="reportDate" />
+    <result column="office_term" jdbcType="VARCHAR" property="officeTerm" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="annual_salary" jdbcType="VARCHAR" property="annualSalary" />
+    <result column="shares" jdbcType="VARCHAR" property="shares" />
+    <result column="shareholders_ratio" jdbcType="DOUBLE" property="shareholdersRatio" />
+    <result column="ordered" jdbcType="INTEGER" property="ordered" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

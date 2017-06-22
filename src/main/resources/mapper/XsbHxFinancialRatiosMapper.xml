@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbHxFinancialRatiosMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbHxFinancialRatios">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="current_ratio" jdbcType="DECIMAL" property="currentRatio" />
+    <result column="quick_ratio" jdbcType="DECIMAL" property="quickRatio" />
+    <result column="debt_equity_ratio" jdbcType="DECIMAL" property="debtEquityRatio" />
+    <result column="debt_solvency_ratio" jdbcType="DECIMAL" property="debtSolvencyRatio" />
+    <result column="debt_structure_ratio" jdbcType="DECIMAL" property="debtStructureRatio" />
+    <result column="interest_coverage_ratio" jdbcType="DECIMAL" property="interestCoverageRatio" />
+    <result column="roe" jdbcType="DECIMAL" property="roe" />
+    <result column="rota" jdbcType="DECIMAL" property="rota" />
+    <result column="gross_profit_margin" jdbcType="DECIMAL" property="grossProfitMargin" />
+    <result column="operating_profit_ratio" jdbcType="DECIMAL" property="operatingProfitRatio" />
+    <result column="dividend_payout_ratio" jdbcType="DECIMAL" property="dividendPayoutRatio" />
+    <result column="earnings_retention_ratio" jdbcType="DECIMAL" property="earningsRetentionRatio" />
+    <result column="accounts_receivable_turnover_ratio" jdbcType="DECIMAL" property="accountsReceivableTurnoverRatio" />
+    <result column="current_assets_turnover_rate" jdbcType="DECIMAL" property="currentAssetsTurnoverRate" />
+    <result column="fixed_asset_turnover" jdbcType="DECIMAL" property="fixedAssetTurnover" />
+    <result column="inventory_turnover_ratio" jdbcType="DECIMAL" property="inventoryTurnoverRatio" />
+    <result column="total_asset_turnover_ratio" jdbcType="DECIMAL" property="totalAssetTurnoverRatio" />
+    <result column="net_asset_turnover_ratio" jdbcType="DECIMAL" property="netAssetTurnoverRatio" />
+    <result column="current_to_total_assets_ratio" jdbcType="DECIMAL" property="currentToTotalAssetsRatio" />
+    <result column="asset_liability_ratio" jdbcType="DECIMAL" property="assetLiabilityRatio" />
+    <result column="capital_immobilized_ratio" jdbcType="DECIMAL" property="capitalImmobilizedRatio" />
+    <result column="rights_coefficient" jdbcType="DECIMAL" property="rightsCoefficient" />
+    <result column="equity_ratio" jdbcType="DECIMAL" property="equityRatio" />
+    <result column="shareholders_equity_ratio" jdbcType="DECIMAL" property="shareholdersEquityRatio" />
+    <result column="operating_income_growth_rate" jdbcType="DECIMAL" property="operatingIncomeGrowthRate" />
+    <result column="net_profit_growth_rate" jdbcType="DECIMAL" property="netProfitGrowthRate" />
+    <result column="total_assets_expansion_rate" jdbcType="DECIMAL" property="totalAssetsExpansionRate" />
+    <result column="earnings_per_share_growth_rate" jdbcType="DECIMAL" property="earningsPerShareGrowthRate" />
+    <result column="net_asset_growth_rate" jdbcType="DECIMAL" property="netAssetGrowthRate" />
+    <result column="operating_cash_flows_per_share" jdbcType="DECIMAL" property="operatingCashFlowsPerShare" />
+    <result column="operating_cash_flow_return_assets" jdbcType="DECIMAL" property="operatingCashFlowReturnAssets" />
+    <result column="operating_cash_flows_liabilities_ratio" jdbcType="DECIMAL" property="operatingCashFlowsLiabilitiesRatio" />
+    <result column="business_activities_generated_cash_flows_growth_rate" jdbcType="DECIMAL" property="businessActivitiesGeneratedCashFlowsGrowthRate" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsDividendsMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsDividends">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="directors_board_date" jdbcType="DATE" property="directorsBoardDate" />
+    <result column="shareholders_meeting_date" jdbcType="DATE" property="shareholdersMeetingDate" />
+    <result column="impl_date" jdbcType="DATE" property="implDate" />
+    <result column="dividends_scheme" jdbcType="VARCHAR" property="dividendsScheme" />
+    <result column="register_day" jdbcType="VARCHAR" property="registerDay" />
+    <result column="except_authority_day" jdbcType="VARCHAR" property="exceptAuthorityDay" />
+    <result column="send_launch_stock_day" jdbcType="VARCHAR" property="sendLaunchStockDay" />
+    <result column="scheme_progress" jdbcType="VARCHAR" property="schemeProgress" />
+    <result column="bonus_payout_rate" jdbcType="VARCHAR" property="bonusPayoutRate" />
+    <result column="bonus_rate" jdbcType="VARCHAR" property="bonusRate" />
+  </resultMap>
+</mapper>

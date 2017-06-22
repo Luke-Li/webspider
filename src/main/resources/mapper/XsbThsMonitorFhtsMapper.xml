@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsMonitorFhtsMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsMonitorFhts">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="stock_name" jdbcType="VARCHAR" property="stockName" />
+    <result column="program_description" jdbcType="VARCHAR" property="programDescription" />
+    <result column="per_share_dividend" jdbcType="VARCHAR" property="perShareDividend" />
+    <result column="basic_equity" jdbcType="VARCHAR" property="basicEquity" />
+    <result column="reporting_period" jdbcType="VARCHAR" property="reportingPeriod" />
+    <result column="announcement_date" jdbcType="VARCHAR" property="announcementDate" />
+    <result column="ex_dividend_date" jdbcType="VARCHAR" property="exDividendDate" />
+    <result column="dividend_date" jdbcType="VARCHAR" property="dividendDate" />
+  </resultMap>
+</mapper>

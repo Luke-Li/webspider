@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbThsAdditionalMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbThsAdditional">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="actual_issue_price" jdbcType="VARCHAR" property="actualIssuePrice" />
+    <result column="actual_number_issued" jdbcType="VARCHAR" property="actualNumberIssued" />
+    <result column="actual_raised_net" jdbcType="VARCHAR" property="actualRaisedNet" />
+    <result column="plan_issue_price" jdbcType="VARCHAR" property="planIssuePrice" />
+    <result column="plan_issue_number" jdbcType="VARCHAR" property="planIssueNumber" />
+    <result column="plan_raised_net" jdbcType="VARCHAR" property="planRaisedNet" />
+    <result column="ipo_report_day" jdbcType="DATE" property="ipoReportDay" />
+    <result column="new_shares_day" jdbcType="DATE" property="newSharesDay" />
+    <result column="csrc_report_day" jdbcType="DATE" property="csrcReportDay" />
+    <result column="iec_report_day" jdbcType="DATE" property="iecReportDay" />
+    <result column="shareholders_meeting_day" jdbcType="DATE" property="shareholdersMeetingDay" />
+    <result column="plan_announced_day" jdbcType="DATE" property="planAnnouncedDay" />
+    <result column="scheme_progress" jdbcType="VARCHAR" property="schemeProgress" />
+    <result column="release_type" jdbcType="VARCHAR" property="releaseType" />
+    <result column="release_mode" jdbcType="VARCHAR" property="releaseMode" />
+  </resultMap>
+</mapper>

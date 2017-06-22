@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.PedailyCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.PedailyCompany">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="industry" jdbcType="VARCHAR" property="industry" />
+    <result column="detail_url" jdbcType="VARCHAR" property="detailUrl" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.PofInfoMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.PofInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pof_id" jdbcType="INTEGER" property="pofId" />
+    <result column="integrityInfo" jdbcType="VARCHAR" property="integrityinfo" />
+    <result column="managerName" jdbcType="VARCHAR" property="managername" />
+    <result column="managerNameEn" jdbcType="VARCHAR" property="managernameen" />
+    <result column="registerNo" jdbcType="VARCHAR" property="registerno" />
+    <result column="organizationCode" jdbcType="VARCHAR" property="organizationcode" />
+    <result column="establishDate" jdbcType="VARCHAR" property="establishdate" />
+    <result column="registerDate" jdbcType="VARCHAR" property="registerdate" />
+    <result column="registerAddress" jdbcType="VARCHAR" property="registeraddress" />
+    <result column="officeAddress" jdbcType="VARCHAR" property="officeaddress" />
+    <result column="regCapital" jdbcType="VARCHAR" property="regcapital" />
+    <result column="paidinCapital" jdbcType="VARCHAR" property="paidincapital" />
+    <result column="entNature" jdbcType="VARCHAR" property="entnature" />
+    <result column="regcapitalPaidinRatio" jdbcType="VARCHAR" property="regcapitalpaidinratio" />
+    <result column="primaryInvestType" jdbcType="VARCHAR" property="primaryinvesttype" />
+    <result column="otherBiztype" jdbcType="VARCHAR" property="otherbiztype" />
+    <result column="employNum" jdbcType="VARCHAR" property="employnum" />
+    <result column="site" jdbcType="VARCHAR" property="site" />
+    <result column="legalOpinion" jdbcType="VARCHAR" property="legalopinion" />
+    <result column="artificialPersonName" jdbcType="VARCHAR" property="artificialpersonname" />
+    <result column="isHasCredit" jdbcType="VARCHAR" property="ishascredit" />
+    <result column="creditGetWay" jdbcType="VARCHAR" property="creditgetway" />
+    <result column="lastUpdatedDate" jdbcType="VARCHAR" property="lastupdateddate" />
+    <result column="specialTips" jdbcType="VARCHAR" property="specialtips" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+</mapper>

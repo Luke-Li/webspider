@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.PofInfoFundMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.PofInfoFund">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="pof_info_id" jdbcType="INTEGER" property="pofInfoId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="fundNo" jdbcType="VARCHAR" property="fundno" />
+    <result column="establishDate" jdbcType="VARCHAR" property="establishdate" />
+    <result column="registerDate" jdbcType="VARCHAR" property="registerdate" />
+    <result column="filingPhase" jdbcType="VARCHAR" property="filingphase" />
+    <result column="fundType" jdbcType="VARCHAR" property="fundtype" />
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="pofManagerName" jdbcType="VARCHAR" property="pofmanagername" />
+    <result column="manageType" jdbcType="VARCHAR" property="managetype" />
+    <result column="custodianName" jdbcType="VARCHAR" property="custodianname" />
+    <result column="investmentField" jdbcType="VARCHAR" property="investmentfield" />
+    <result column="operationState" jdbcType="VARCHAR" property="operationstate" />
+    <result column="lastUpdatedDate" jdbcType="VARCHAR" property="lastupdateddate" />
+    <result column="specialTips" jdbcType="VARCHAR" property="specialtips" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+</mapper>

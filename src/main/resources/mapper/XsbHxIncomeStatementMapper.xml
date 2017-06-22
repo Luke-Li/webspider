@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinaventure.webspider.mapper.XsbHxIncomeStatementMapper">
+  <resultMap id="BaseResultMap" type="com.chinaventure.webspider.model.XsbHxIncomeStatement">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ent_id" jdbcType="INTEGER" property="entId" />
+    <result column="report_date" jdbcType="DATE" property="reportDate" />
+    <result column="net_income" jdbcType="DECIMAL" property="netIncome" />
+    <result column="net_profit_growth_rate" jdbcType="DECIMAL" property="netProfitGrowthRate" />
+    <result column="operating_revenue" jdbcType="DECIMAL" property="operatingRevenue" />
+    <result column="profit_margin" jdbcType="DECIMAL" property="profitMargin" />
+    <result column="operating_income_growth_rate" jdbcType="DECIMAL" property="operatingIncomeGrowthRate" />
+    <result column="total_operating_cost" jdbcType="DECIMAL" property="totalOperatingCost" />
+    <result column="operating_profit" jdbcType="DECIMAL" property="operatingProfit" />
+    <result column="return_on_investment" jdbcType="DECIMAL" property="returnOnInvestment" />
+    <result column="asset_impairment_loss" jdbcType="DECIMAL" property="assetImpairmentLoss" />
+    <result column="management_fee" jdbcType="DECIMAL" property="managementFee" />
+    <result column="sales_cost" jdbcType="DECIMAL" property="salesCost" />
+    <result column="financial_expenses" jdbcType="DECIMAL" property="financialExpenses" />
+    <result column="non_operating_revenue" jdbcType="DECIMAL" property="nonOperatingRevenue" />
+    <result column="non_business_expenses" jdbcType="DECIMAL" property="nonBusinessExpenses" />
+    <result column="business_tax_additional" jdbcType="DECIMAL" property="businessTaxAdditional" />
+    <result column="profit_total" jdbcType="DECIMAL" property="profitTotal" />
+    <result column="income_tax" jdbcType="DECIMAL" property="incomeTax" />
+    <result column="total_amount_comprehensive_income" jdbcType="DECIMAL" property="totalAmountComprehensiveIncome" />
+    <result column="total_comprehensive_income_attributable_parent_shareholders" jdbcType="DECIMAL" property="totalComprehensiveIncomeAttributableParentShareholders" />
+    <result column="basic_earnings_per_share" jdbcType="DECIMAL" property="basicEarningsPerShare" />
+    <result column="diluted_earnings_per_share" jdbcType="DECIMAL" property="dilutedEarningsPerShare" />
+  </resultMap>
+</mapper>
