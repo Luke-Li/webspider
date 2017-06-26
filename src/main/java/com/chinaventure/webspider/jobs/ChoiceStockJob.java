@@ -26,13 +26,13 @@ import org.zbus.mq.Consumer.ConsumerHandler;
 import org.zbus.mq.Producer;
 import org.zbus.net.http.Message;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.chinaventure.webspider.JFConfig;
-import com.chinaventure.webspider.bean.ChoiceEntBean;
-import com.chinaventure.webspider.bean.ChoiceEntBeanBak;
+import com.chinaventure.webspider.bean.ChoiceEntBeanNew;
 import com.chinaventure.webspider.model.jfinal.ChoiceErrorLog;
-import com.chinaventure.webspider.model.jfinal.ChoiceStockA;
+import com.chinaventure.webspider.model.jfinal.ChoiceStockANew;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockASeed;
 import com.chinaventure.webspider.service.impl.ZbusService;
 import com.chinaventure.webspider.util.FileUtil;
@@ -44,7 +44,7 @@ import com.chinaventure.webspider.util.StringUtil;
 import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
 
-public class ChoiceClientJob extends Job {
+public class ChoiceStockJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
 
@@ -52,14 +52,15 @@ public class ChoiceClientJob extends Job {
 		Map<String, String> params = new HashMap<>();
 		params.put("zbus", PropertiesUtil.getProperty("zbus"));
 		params.put("isInitSeed", PropertiesUtil.getProperty("is_init"));
-		new ChoiceClientJob().execute(params);
+		new ChoiceStockJob().execute(params);
 	}
 
 	private Downloader.Request getChoiceRequest(String url, String referer, String code) {
 		String stock_market = code.startsWith("60") ? ".SH" : ".SZ";
 
 		if (StringUtils.isEmpty(referer)) {
-			referer = MessageFormat.format("http://app.jg.eastmoney.com/html_f9/index.html?securitycode={0}{1}&HeadHidden=1", code, stock_market);
+//			referer = MessageFormat.format("http://app.jg.eastmoney.com/html_f9/index.html?securitycode={0}{1}&HeadHidden=1", code, stock_market);
+			referer = MessageFormat.format("http://app.jg.eastmoney.com/html_f9/index.html?securitycode={0}{1}", code, stock_market);
 		} else {
 			referer = MessageFormat.format(referer, code);
 		}
@@ -79,7 +80,6 @@ public class ChoiceClientJob extends Job {
 		request.addHeader("Referer", referer);
 		request.addHeader("Accept-Encoding", "gzip,deflate");
 		request.addHeader("Accept-Language", "en-us,en");
-		
 //		request.addCookie("emstat_bc_emcount", "38614422101921477329");
 //		request.addCookie("emstat_ss_emcount", "0_1498148878_182160029");
 //		request.addCookie("st_pvi", "29896496352739");
@@ -231,25 +231,36 @@ public class ChoiceClientJob extends Job {
 		// 当前股票代码
 		String code = stock.getStr("code");
 
-//		ChoiceEntBean bean = new ChoiceEntBean();
-		ChoiceEntBean bean = new ChoiceEntBean();
+//		ChoiceEntBeanNew bean = new ChoiceEntBeanNew();
+		ChoiceEntBeanNew bean = new ChoiceEntBeanNew();
 
-		for (String[] item : ChoiceEntBean.EntItems) {
+		for (String[] item : ChoiceEntBeanNew.EntItems) {
 			String name = item[0], url = item[1], referfer = item[2];
 
 			Downloader.Request request = getChoiceRequest(url, referfer, code);
 			String html = StringUtil.decodeUnicode(HttpclientUtils.downloadHtmlRetry(request));
 			
+			
 			switch (name) {
 			case "info":
-				JSONArray array = JSONArray.parseArray(html);
+				Map<String, Object> map = new HashMap<String, Object>();
+				Object tmp = JSONArray.parse(html);
+				map = (Map<String,Object>)tmp;
+				Map<String,Object> basicInfo = (Map<String,Object>)map.get("companyInfo");
+				String entName = (String)basicInfo.get("COMPANYNAME");
+				bean.setCode(code);
+				bean.setName(entName);
+				bean.setCreateTime(new Date());
+				bean.setUpdateTime(new Date());
+				/*JSONArray array = JSONArray.parseArray(html);
 				bean.setInfo(array);
 				bean.setCode(code);
 				bean.setName(array.getJSONObject(0).getString("col1"));
 				bean.setCreateTime(new Date());
-				bean.setUpdateTime(new Date());
+				bean.setUpdateTime(new Date());*/
+				bean.setInfo(html);
 				break;
-			case "name_history":
+			/*case "name_history":
 				setInfo(bean, html, "曾用名");
 				break;
 			case "ManageAnalysis":
@@ -257,7 +268,7 @@ public class ChoiceClientJob extends Job {
 				break;
 			case "SimpleAnalysis":
 				setInfo(bean, html, "简史");
-				break;
+				break;*/
 
 			case "EquityCnotrolledCompany":
 				bean.EquityCnotrolledCompany = html;// 参控股公司
@@ -398,19 +409,19 @@ public class ChoiceClientJob extends Job {
 		// 数据入库
 		bean.setCookie(FileUtil.getLocalIp());
 
-		ChoiceStockA.dao.insertOrUpdate(bean);
+		ChoiceStockANew.dao.insertOrUpdate(bean);
 
 		logger.info(MessageFormat.format("end download code :{0}  name:{1}!", code, stock.getStr("name")));
 	}
 
-	private void setInfo(ChoiceEntBean bean, String html, String fieldName) {
+	/*private void setInfo(ChoiceEntBeanNew bean, String html, String fieldName) {
 		bean.getInfo().forEach(b -> {
 			JSONObject o = (JSONObject) b;
 			if (StringUtils.equalsIgnoreCase(o.getString("col0"), fieldName)) {
 				o.put("col1", html);
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * 把TABLE解析成JSON字符串格式
