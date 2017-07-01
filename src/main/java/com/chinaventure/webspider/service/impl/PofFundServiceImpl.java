@@ -129,6 +129,7 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 		if (null == model) {
 			pofListMapper.insert(pofList);
 		} else {
+			pofList.setId(model.getId());
 			pofListMapper.updateByPrimaryKeySelective(pofList);
 		}
 
@@ -142,7 +143,7 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 		//先删除，再插入
 		pofInfoMapper.delete(new PofInfo(){{setPofId(pofList.getId());}});
 		pofInfoMapper.insert(info);
-
+		
 		// 高管履历
 		List<PofInfoLegalpersonResume> resumes = info.getPersonResumes();
 		for (PofInfoLegalpersonResume personResume : resumes) {
@@ -176,6 +177,13 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 		if (funds.size() > 0)
 			pofInfoFundMapper.insertList(funds);
 
+	}
+	/**
+	 * 获取基金信息
+	 */
+	@Override
+	public PofInfo selectPofInfoByMananagerName(String managerName){
+		return pofInfoMapper.selectOne(new PofInfo(){{this.setManagername(managerName);}});
 	}
 
 }

@@ -11,6 +11,8 @@ import org.apache.http.util.Args;
 import org.apache.http.util.ByteArrayBuffer;
 import org.apache.log4j.Logger;
 
+import com.chinaventure.webspider.util.url.URLUtil;
+
 import net.kernal.spiderman.worker.download.DownloadWorker;
 import net.kernal.spiderman.worker.download.Downloader;
 import net.kernal.spiderman.worker.download.impl.HttpClientDownloader;

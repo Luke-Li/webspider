@@ -40,6 +40,7 @@ import com.chinaventure.webspider.util.HttpclientUtils;
 import com.chinaventure.webspider.util.NumberUtil;
 import com.chinaventure.webspider.util.PropertiesUtil;
 import com.chinaventure.webspider.util.StringUtil;
+import com.chinaventure.webspider.util.url.URLUtil;
 
 import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
@@ -71,24 +72,26 @@ public class ChoiceClientJob extends Job {
 		}
 
 		Downloader.Request request = new Downloader.Request(url);
+		
+		URLUtil.fillRequestHeader(request, referer);
 
-		request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-//		request.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.59 Safari/537.36");
-		request.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36");
-		request.addHeader("X-Requested-With", "XMLHttpRequest");
-		request.addHeader("Referer", referer);
-		request.addHeader("Accept-Encoding", "gzip,deflate");
-		request.addHeader("Accept-Language", "en-us,en");
-		
-//		request.addCookie("emstat_bc_emcount", "38614422101921477329");
-//		request.addCookie("emstat_ss_emcount", "0_1498148878_182160029");
-//		request.addCookie("st_pvi", "29896496352739");
-//		request.addCookie("st_si", "96428275923244");
-		request.addCookie(".ASPXAUTH", "492631068A452A96168CE9AD2B08E0F2F05C770AA35B0DF55A2A582226B28584CB1D5E75FAD14440BF7AFC48B1A707A21107D0EA1E31BC2F8884EA6ED6028A52A506D1146B5C87BB54F6AFF22FA078055C68166AD801F8A68791FDD599B64082B9F402CDA0EBA34629D9FFC8F5C2DB933BC3CDD9031E1ED76C5669192FE9A2E1411CA9BB302771624CCB8377D1C8FED892E204322CC9B3CCF23236D3BABF36CD81F2C7826450DFFC8FDF188F937EA8702CDB5B3F37805B9B1947DE289B928948F7BEC2DB21B2034B3FB7858C3979A439E3C1987275909846C6360EED83E80674208F1192340A518C845C78DAD2D56A9472D9FB05CF9FAE4ABA85821ECB2FEA64CAFD017BCA4BEF89C1A2086715C4EC6A1EF2333554B8F5F77D5D6D973227652BE0EFBB1EE5A76AEC1CD748B97B7F5D3B719FEECCF00A0FDFFB8B0B44BFC3159BC93A369D08D364CD34B84DA3A902CC5A3FDF9DD3979322EC9514CB8E54F4107809BEA439CA0473E14CED32E45FBF5E7E3FB1C6F6B8F5BE050C0DD74CC5FF4361");
-		request.addCookie("ct", "aaxCYUr5RH8vCOMIxjybdXkoX4CpAlChK3FjDpHnvTuow8OkLn7r0N7IiTKPnXDiMv8PjEeF7HF0_LqscxG6HFqCnwOq4tUwgjriSZQt3yXBwdnMoQX_MEizQ3x4t2NKztaJ8g3q1DAFM5GsKEcTEbf1dtvYlu0WQtFN8xlFqv4");
-		request.addCookie("ut", "FobyicMgeV74_Lz6VQjygdsJb-mwmvo-KZoh7v6d7TdHaqoYmMm5TZIYju0QUhNuloQBXfSFBKtWUB7M3FwM7z18t1zunozs7Us2tfVY0oSFV5etNiBEMDR9f1jsm656-1CzG-_P0vtKbpLsGKUjyPLwUrdSpLo31CuxxeU9HamzRD6d-Qg7ZEGbiiwC_dGwvZQV2LINmnwUazY6jbvnu7Rzj05-LF0XPfxptvNt-W7s0K2OnjUwzzqg5G-DH-E6lyQAGVG3p9mu54Sv6lUw2EfrlmJuXgZKm5D0a9gBsHWQFbkKPnU865CZOS_YvSfm");
-		request.addCookie("pi", "2968044966403974%3bx2968044966403974%3b%e8%82%a1%e5%8f%8bUZNFas%3bmT6xt8Z70mbcuZ2PPfOQ3mTOWMiBGQ1E9ZW0xKOZTDpXVu3C3Ofq%2bRsmltKksKWCrFio%2f2f484wES47QiIBQ%2fMLTxlumBd09Fv6af0fmp8BKwTPtCXu7OYJZnT9rzsCYqNP8wwLGigwpEIDznFOlzZJdeLYLetRpc7vlJS6qR19CAZdSosK%2bkAGa4S6pLDJGlXespPP1%3bKTybsKTor%2bx4ydDQ%2fVPCJzmYUn5PXPBoOVDZi9Lo1%2bwr1yUSnlDCCInDtV%2bcBAhYv9udvJ1veI9rs0csTROfir%");
-		
+//		request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+////		request.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.59 Safari/537.36");
+//		request.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.94 Safari/537.36");
+//		request.addHeader("X-Requested-With", "XMLHttpRequest");
+//		request.addHeader("Referer", referer);
+//		request.addHeader("Accept-Encoding", "gzip,deflate");
+//		request.addHeader("Accept-Language", "en-us,en");
+//		
+////		request.addCookie("emstat_bc_emcount", "38614422101921477329");
+////		request.addCookie("emstat_ss_emcount", "0_1498148878_182160029");
+////		request.addCookie("st_pvi", "29896496352739");
+////		request.addCookie("st_si", "96428275923244");
+//		request.addCookie(".ASPXAUTH", "492631068A452A96168CE9AD2B08E0F2F05C770AA35B0DF55A2A582226B28584CB1D5E75FAD14440BF7AFC48B1A707A21107D0EA1E31BC2F8884EA6ED6028A52A506D1146B5C87BB54F6AFF22FA078055C68166AD801F8A68791FDD599B64082B9F402CDA0EBA34629D9FFC8F5C2DB933BC3CDD9031E1ED76C5669192FE9A2E1411CA9BB302771624CCB8377D1C8FED892E204322CC9B3CCF23236D3BABF36CD81F2C7826450DFFC8FDF188F937EA8702CDB5B3F37805B9B1947DE289B928948F7BEC2DB21B2034B3FB7858C3979A439E3C1987275909846C6360EED83E80674208F1192340A518C845C78DAD2D56A9472D9FB05CF9FAE4ABA85821ECB2FEA64CAFD017BCA4BEF89C1A2086715C4EC6A1EF2333554B8F5F77D5D6D973227652BE0EFBB1EE5A76AEC1CD748B97B7F5D3B719FEECCF00A0FDFFB8B0B44BFC3159BC93A369D08D364CD34B84DA3A902CC5A3FDF9DD3979322EC9514CB8E54F4107809BEA439CA0473E14CED32E45FBF5E7E3FB1C6F6B8F5BE050C0DD74CC5FF4361");
+//		request.addCookie("ct", "aaxCYUr5RH8vCOMIxjybdXkoX4CpAlChK3FjDpHnvTuow8OkLn7r0N7IiTKPnXDiMv8PjEeF7HF0_LqscxG6HFqCnwOq4tUwgjriSZQt3yXBwdnMoQX_MEizQ3x4t2NKztaJ8g3q1DAFM5GsKEcTEbf1dtvYlu0WQtFN8xlFqv4");
+//		request.addCookie("ut", "FobyicMgeV74_Lz6VQjygdsJb-mwmvo-KZoh7v6d7TdHaqoYmMm5TZIYju0QUhNuloQBXfSFBKtWUB7M3FwM7z18t1zunozs7Us2tfVY0oSFV5etNiBEMDR9f1jsm656-1CzG-_P0vtKbpLsGKUjyPLwUrdSpLo31CuxxeU9HamzRD6d-Qg7ZEGbiiwC_dGwvZQV2LINmnwUazY6jbvnu7Rzj05-LF0XPfxptvNt-W7s0K2OnjUwzzqg5G-DH-E6lyQAGVG3p9mu54Sv6lUw2EfrlmJuXgZKm5D0a9gBsHWQFbkKPnU865CZOS_YvSfm");
+//		request.addCookie("pi", "2968044966403974%3bx2968044966403974%3b%e8%82%a1%e5%8f%8bUZNFas%3bmT6xt8Z70mbcuZ2PPfOQ3mTOWMiBGQ1E9ZW0xKOZTDpXVu3C3Ofq%2bRsmltKksKWCrFio%2f2f484wES47QiIBQ%2fMLTxlumBd09Fv6af0fmp8BKwTPtCXu7OYJZnT9rzsCYqNP8wwLGigwpEIDznFOlzZJdeLYLetRpc7vlJS6qR19CAZdSosK%2bkAGa4S6pLDJGlXespPP1%3bKTybsKTor%2bx4ydDQ%2fVPCJzmYUn5PXPBoOVDZi9Lo1%2bwr1yUSnlDCCInDtV%2bcBAhYv9udvJ1veI9rs0csTROfir%");
+//		
 
 		return request;
 	}
@@ -196,7 +199,7 @@ public class ChoiceClientJob extends Job {
 	 * 
 	 * @param stock
 	 */
-	private synchronized void handleStock(ChoiceStockASeed stock) {
+	public synchronized void handleStock(ChoiceStockASeed stock) {
 		try {
 			String name = stock.getStr("name"), code = stock.getStr("code");
 			logger.info(String.format("公司:%s--%s 开始处理", code, name));
@@ -239,7 +242,9 @@ public class ChoiceClientJob extends Job {
 
 			Downloader.Request request = getChoiceRequest(url, referfer, code);
 			String html = StringUtil.decodeUnicode(HttpclientUtils.downloadHtmlRetry(request));
-			
+			if(html.contains("加载失败")){
+				System.exit(1);
+			}
 			switch (name) {
 			case "info":
 				JSONArray array = JSONArray.parseArray(html);

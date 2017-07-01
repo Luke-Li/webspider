@@ -13,11 +13,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.apache.tools.ant.filters.StringInputStream;
 import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -43,6 +47,10 @@ import sealion.core.Job;
 public class PofFundJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
+	
+	private static boolean isPofFund = false;
+	
+	public static String managerUrl = "http://gs.amac.org.cn/amac-infodisc/res/pof/manager/";
 
 	public static void main(String[] args) {
 		Map<String, String> params = new HashMap<>();
@@ -67,7 +75,8 @@ public class PofFundJob extends Job {
 			method.addHeader("Connection", "keep-alive");
 			method.addHeader("Content-Type", "application/json");
 			method.addHeader("Referer", referUrl);
-			method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
+//			method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
+			method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
 			method.addHeader("X-Requested-With", "XMLHttpRequest");
 
 			/*
@@ -78,6 +87,13 @@ public class PofFundJob extends Job {
 
 			if (null != params) {
 				method.setEntity(new StringEntity(params.toString(), Charset.forName("UTF-8")));
+			}
+			
+			if(isPofFund == true){
+				InputStreamEntity reqEntity = new InputStreamEntity(
+					new StringInputStream("{}"), -1, ContentType.APPLICATION_OCTET_STREAM);
+			
+				method.setEntity(reqEntity);
 			}
 
 			HttpResponse response = httpClient.execute(method);
@@ -117,7 +133,8 @@ public class PofFundJob extends Job {
 //			context = new ClassPathXmlApplicationContext("file:C:/dev/service/webspider-master/src/main/resources/applicationContext.xml");
 			context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			service = context.getBean(PofFundService.class);
-
+			
+//			pofFundHandle();   //从基金入口
 			aoinFundHandle();
 			pofHandle();
 
@@ -264,7 +281,7 @@ public class PofFundJob extends Job {
 	}
 
 	/**
-	 * 私募基金处理
+	 * 私募基金处理，从管理人入口
 	 */
 	private void pofHandle() {
 		logger.info("开始处理私募基金");
@@ -299,104 +316,25 @@ public class PofFundJob extends Job {
 		for (PofList pofList : list) {
 			try {
 				logger.info("开始处理基金:"+pofList.getManagername());
-				if(service.containsPof(pofList.getManagername()))continue;
+				
 
 				String html = HttpclientUtils.downloadHtmlRetry(url+pofList.getUrl());
+				if(html==null || "".equals(html)){
+					continue;
+				}
 				Document doc = Jsoup.parse(html);
 				Elements baseTrs = doc.select("div[class=\"m-manager-list m-list-details\"] > table > tbody > tr");
 
-				PofInfo info = new PofInfo();
-
-				for (int i = 0; i < baseTrs.size(); i++) {
-					Element currentTr = baseTrs.get(i);
-					String title = currentTr.child(0).text();
-
-					String text = currentTr.children().size() > 1 ? currentTr.child(1).text() : null;
-
-					if (title.contains("机构诚信信息")) {
-						info.setIntegrityinfo(text);
-					} else if (title.contains("基金管理人全称(中文)")) {
-						String[] managerNames = StringUtils.split(text, ' ');
-						info.setManagername(managerNames[0]);
-					} else if (title.contains("基金管理人全称(英文)")) {
-						info.setManagernameen(text);
-					} else if (title.contains("登记编号")) {
-						info.setRegisterno(text);
-					} else if (title.contains("组织机构代码:")) {
-						info.setOrganizationcode(text);
-					} else if (title.contains("登记时间:")) {
-						info.setRegisterdate(text);
-						// 成立时间
-						info.setEstablishdate(currentTr.child(3).text());
-					} else if (title.contains("注册地址:")) {
-						info.setRegisteraddress(text);
-					} else if (title.contains("办公地址:")) {
-						info.setOfficeaddress(text);
-					} else if (title.contains("注册资本(万元):")) {
-						info.setRegcapital(text);
-						// 实缴资本(万元):
-						info.setPaidincapital(currentTr.child(3).text());
-					} else if (title.contains("企业性质:")) {
-						info.setEntnature(text);
-						// 注册资本实缴比例:
-						info.setRegcapitalpaidinratio(currentTr.child(3).text());
-					} else if (title.contains("管理基金主要类别")) {
-						info.setPrimaryinvesttype(text);
-						// 申请的其他业务类型:
-						info.setOtherbiztype(currentTr.child(3).text());
-					} else if (title.contains("员工人数:")) {
-						info.setEmploynum(text);
-						// 机构网址:
-						info.setSite(currentTr.child(3).text());
-					} else if (title.contains("法律意见书状态:")) {
-						info.setLegalopinion(text);
-					} else if (title.contains("法定代表人/执行事务合伙人(委派代表)姓名")) {
-						info.setArtificialpersonname(text);
-					} else if (title.contains("是否有从业资格")) {
-						info.setIshascredit(text);
-						// 资格取得方式:
-						info.setCreditgetway(currentTr.child(3).text());
-					} else if (title.contains("法定代表人/执行事务合伙人(委派代表)工作履历")) {
-						// 单独处理
-						Elements managerTrs = currentTr.child(1).select("table:eq(0) > tbody > tr");
-						for (Element managerTr : managerTrs) {
-							PofInfoLegalpersonResume personResume = new PofInfoLegalpersonResume();
-
-							personResume.setTenureoffice(managerTr.child(0).text());
-							personResume.setTenureent(managerTr.child(1).text());
-							personResume.setPosition(managerTr.child(2).text());
-
-							info.getPersonResumes().add(personResume);
-						}
-					} else if (title.contains("高管情况:")) {
-						// 单独处理
-						Elements managerTrs = currentTr.child(1).select("table:eq(0) > tbody > tr");
-						for (Element managerTr : managerTrs) {
-							PofInfoManager fundManager = new PofInfoManager();
-
-							fundManager.setName(managerTr.child(0).text());
-							fundManager.setPosition(managerTr.child(1).text());
-							fundManager.setIshascredit(managerTr.child(2).text());
-
-							info.getFundManagers().add(fundManager);
-						}
-					} else if (title.contains("暂行办法实施前成立的基金") || title.contains("暂行办法实施后成立的基金")) {
-						// 单独处理
-						Elements as = currentTr.child(1).getElementsByTag("a");
-						for (Element a : as) {
-							String hrefUrl = a.attr("href");
-							String fundUrl = UrlStandardization.Normalize(url, hrefUrl)[0];
-
-							PofInfoFund fund = pofHandle(fundUrl);
-							info.getInfoFunds().add(fund);
-						}
-
-					} else if (title.contains("机构信息最后更新时间")) {
-						info.setLastupdateddate(text);
-					} else if (title.contains("特别提示信息")) {
-						info.setSpecialtips(text);
-					}
+				PofInfo info = service .selectPofInfoByMananagerName(pofList.getManagername());
+				if(!this.needUpdate(info, doc)){
+					continue;
 				}
+				if(info == null){
+					info = new PofInfo();
+				}
+//				PofInfo info = new PofInfo();
+				this.newManagerHandle(info, baseTrs);
+				
 				pofList.setInfo(info);
 				service.updatePofList(pofList);
 				logger.info("基金:"+pofList.getManagername()+"处理完成!");
@@ -404,9 +342,138 @@ public class PofFundJob extends Job {
 				logger.error("处理基金:" + pofList.getManagername() + " 异常", e);
 			}
 		}
+	}
+	
+	/**
+	 * 新的基金管理人 处理办法
+	 * @param info
+	 * @param baseTrs
+	 */
+	private void newManagerHandle(PofInfo info, Elements baseTrs){
+		if(null == info || baseTrs == null){
+			return;
+		}
+		
+		for (int i = 0; i < baseTrs.size(); i++) {
+			Element currentTr = baseTrs.get(i);
+			String title = currentTr.child(0).text();
 
+			String text = currentTr.children().size() > 1 ? currentTr.child(1).text() : null;
 
+			if (title.contains("机构诚信信息")) {
+				info.setIntegrityinfo(text);
+			} else if (title.contains("基金管理人全称(中文)")) {
+				String[] managerNames = StringUtils.split(text, ' ');
+				info.setManagername(managerNames[0]);
+			} else if (title.contains("基金管理人全称(英文)")) {
+				info.setManagernameen(text);
+			} else if (title.contains("登记编号")) {
+				info.setRegisterno(text);
+			} else if (title.contains("组织机构代码:")) {
+				info.setOrganizationcode(text);
+			} else if (title.contains("登记时间:")) {
+				info.setRegisterdate(text);
+				// 成立时间
+				info.setEstablishdate(currentTr.child(3).text());
+			} else if (title.contains("注册地址:")) {
+				info.setRegisteraddress(text);
+			} else if (title.contains("办公地址:")) {
+				info.setOfficeaddress(text);
+			} else if (title.contains("注册资本(万元):")) {
+				info.setRegcapital(text);
+				// 实缴资本(万元):
+				info.setPaidincapital(currentTr.child(3).text());
+			} else if (title.contains("企业性质:")) {
+				info.setEntnature(text);
+				// 注册资本实缴比例:
+				info.setRegcapitalpaidinratio(currentTr.child(3).text());
+			} else if (title.contains("管理基金主要类别")) {
+				info.setPrimaryinvesttype(text);
+				// 申请的其他业务类型:
+				info.setOtherbiztype(currentTr.child(3).text());
+			} else if (title.contains("员工人数:")) {
+				info.setEmploynum(text);
+				// 机构网址:
+				info.setSite(currentTr.child(3).text());
+			} else if (title.contains("法律意见书状态:")) {
+				info.setLegalopinion(text);
+			} else if (title.contains("法定代表人/执行事务合伙人(委派代表)姓名")) {
+				info.setArtificialpersonname(text);
+			} else if (title.contains("是否有从业资格")) {
+				info.setIshascredit(text);
+				// 资格取得方式:
+				info.setCreditgetway(currentTr.child(3).text());
+			} else if (title.contains("法定代表人/执行事务合伙人(委派代表)工作履历")) {
+				// 单独处理
+				Elements managerTrs = currentTr.child(1).select("table:eq(0) > tbody > tr");
+				for (Element managerTr : managerTrs) {
+					PofInfoLegalpersonResume personResume = new PofInfoLegalpersonResume();
 
+					personResume.setTenureoffice(managerTr.child(0).text());
+					personResume.setTenureent(managerTr.child(1).text());
+					personResume.setPosition(managerTr.child(2).text());
+
+					info.getPersonResumes().add(personResume);
+				}
+			} else if (title.contains("高管情况:")) {
+				// 单独处理
+				Elements managerTrs = currentTr.child(1).select("table:eq(0) > tbody > tr");
+				for (Element managerTr : managerTrs) {
+					PofInfoManager fundManager = new PofInfoManager();
+
+					fundManager.setName(managerTr.child(0).text());
+					fundManager.setPosition(managerTr.child(1).text());
+					fundManager.setIshascredit(managerTr.child(2).text());
+
+					info.getFundManagers().add(fundManager);
+				}
+			} else if (title.contains("暂行办法实施前成立的基金") || title.contains("暂行办法实施后成立的基金")) {
+				// 单独处理
+				Elements as = currentTr.child(1).getElementsByTag("a");
+				for (Element a : as) {
+					String hrefUrl = a.attr("href");
+					String fundUrl = UrlStandardization.Normalize(managerUrl, hrefUrl)[0];
+
+					PofInfoFund fund = pofHandle(fundUrl);
+					info.getInfoFunds().add(fund);
+				}
+
+			} else if (title.contains("机构信息最后更新时间")) {
+				info.setLastupdateddate(text);
+			} else if (title.contains("特别提示信息")) {
+				info.setSpecialtips(text);
+			}
+		}
+	}
+	
+	/**
+	 * 以前就有的基金管理人
+	 * 只更新基金列表
+	 * @param info
+	 * @param baseTrs
+	 */
+	private void oldManagerHandle(PofInfo info, Elements baseTrs){
+		if(null == info || baseTrs == null){
+			return;
+		}
+		
+		for (int i = 0; i < baseTrs.size(); i++) {
+			Element currentTr = baseTrs.get(i);
+			String title = currentTr.child(0).text();
+
+			if (title.contains("暂行办法实施前成立的基金") || title.contains("暂行办法实施后成立的基金")) {
+				// 单独处理
+				Elements as = currentTr.child(1).getElementsByTag("a");
+				for (Element a : as) {
+					String hrefUrl = a.attr("href");
+					String fundUrl = UrlStandardization.Normalize(managerUrl, hrefUrl)[0];
+
+					PofInfoFund fund = pofHandle(fundUrl);
+					info.getInfoFunds().add(fund);
+				}
+
+			} 
+		}
 	}
 
 	private PofInfoFund pofHandle(String fundUrl) {
@@ -483,5 +550,92 @@ public class PofFundJob extends Job {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 私募基金处理，从私募基金入口
+	 */
+	public void pofFundHandle(){
+		logger.info("开始处理私募基金");
+
+		String url = "http://gs.amac.org.cn/amac-infodisc/api/pof/fund?rand=0.5135618324280553&page=%s&size=100";// page从0开始,size=100
+		String referUrl = "http://gs.amac.org.cn/amac-infodisc/res/pof/fund/index.html";
+
+		JsonObject params = new JsonObject();
+		params.addProperty("rand", "0.5135618324280553");
+		params.addProperty("page", "0");
+		params.addProperty("size", "100");
+
+		isPofFund = true;
+		JSONObject baseObject = multipleDownload(String.format(url, 0), referUrl, params);
+		isPofFund = false;
+		
+		pofHandle(parsePofListFromFund(baseObject));
+
+		Integer totalPages = baseObject.getInteger("totalPages");
+		if (null != totalPages) {
+			for (int i = 1; i < totalPages; i++) {
+				params = new JsonObject();
+				params.addProperty("rand", "0.5135618324280553");
+				params.addProperty("page", Integer.toString(i));
+				params.addProperty("size", "100");
+
+				isPofFund = true;
+				baseObject = multipleDownload(String.format(url, i), referUrl, params);
+				isPofFund = false;
+				
+				pofHandle(parsePofListFromFund(baseObject));
+			}
+		}
+	}
+	
+	/**
+	 * 解析私募基金管理人从基金产品页
+	 * @param object
+	 * @return
+	 */
+	private List<PofList> parsePofListFromFund(JSONObject object) {
+		List<PofList> list = new ArrayList<>();
+		Date now = new Date();
+		JSONArray datas = object.getJSONArray("content");
+		for (int i = 0; i < datas.size(); i++) {
+			JSONObject item = datas.getJSONObject(i);
+
+			PofList model = new PofList();
+			
+			model.setManagername(item.getString("managerName"));
+			model.setUrl(item.getString("managerUrl").substring(11));
+
+			list.add(model);
+		}
+
+		return list;
+	}
+	
+	private boolean needUpdate(PofInfo info, Document doc){
+		if(info == null){
+			return true;
+		}
+		
+		Elements baseTrs = doc.select("div[class=\"m-manager-list m-list-details\"] > table > tbody > tr");
+		
+		if(baseTrs != null){
+			for (int i = 0; i < baseTrs.size(); i++) {
+				Element currentTr = baseTrs.get(i);
+				String title = currentTr.child(0).text();
+	
+				String text = currentTr.children().size() > 1 ? currentTr.child(1).text() : null;
+				
+				if(title.contains("机构信息最后更新时间") && !StringUtil.isBlank(text)){
+					if(text.compareToIgnoreCase(info.getLastupdateddate()) > 0){
+						return true;
+					}else{
+						return false;
+					}
+				}
+			}
+		}
+		
+		return true;
 	}
 }

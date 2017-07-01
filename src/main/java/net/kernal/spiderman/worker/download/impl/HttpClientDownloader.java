@@ -32,6 +32,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.log4j.Logger;
 
 import com.chinaventure.webspider.util.HttpclientUtils;
+import com.chinaventure.webspider.util.url.URLUtil;
 import com.google.common.escape.Escaper;
 import com.google.common.escape.Escapers;
 
@@ -202,6 +203,7 @@ public class HttpClientDownloader extends Downloader {
 			cs.getCookies().parallelStream()
 				.map(c -> new Cookie(c.getName(), c.getValue(), c.getDomain(), c.getPath(), c.getExpiryDate(), c.isSecure()))
 				.forEach(c -> keepCookie(c));
+//			URLUtil.insertCookies(cs.getCookies());
 			// get redirect location
 			org.apache.http.Header locationHeader = resp.getFirstHeader("Location");
 			if (locationHeader != null && (statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_MOVED_TEMPORARILY)) 

@@ -3,6 +3,7 @@ package com.chinaventure.webspider.service;
 import java.util.List;
 
 import com.chinaventure.webspider.model.PofAoinFund;
+import com.chinaventure.webspider.model.PofInfo;
 import com.chinaventure.webspider.model.PofList;
 
 public interface PofFundService {
@@ -25,5 +26,12 @@ public interface PofFundService {
 	 * @return
 	 */
 	boolean containsPof(String managername);
+	
+	/**
+	 * 获取更新基金信息
+	 * @param managerName
+	 * @return
+	 */
+	PofInfo selectPofInfoByMananagerName(String managerName);
 	
 }
