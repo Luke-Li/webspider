@@ -47,9 +47,9 @@ import sealion.core.Job;
 public class PofFundJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
-	
+
 	private static boolean isPofFund = false;
-	
+
 	public static String managerUrl = "http://gs.amac.org.cn/amac-infodisc/res/pof/manager/";
 
 	public static void main(String[] args) {
@@ -75,8 +75,11 @@ public class PofFundJob extends Job {
 			method.addHeader("Connection", "keep-alive");
 			method.addHeader("Content-Type", "application/json");
 			method.addHeader("Referer", referUrl);
-//			method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
-			method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
+			// method.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1;
+			// Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)
+			// Chrome/52.0.2743.116 Safari/537.36");
+			method.addHeader("User-Agent",
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36");
 			method.addHeader("X-Requested-With", "XMLHttpRequest");
 
 			/*
@@ -88,11 +91,11 @@ public class PofFundJob extends Job {
 			if (null != params) {
 				method.setEntity(new StringEntity(params.toString(), Charset.forName("UTF-8")));
 			}
-			
-			if(isPofFund == true){
-				InputStreamEntity reqEntity = new InputStreamEntity(
-					new StringInputStream("{}"), -1, ContentType.APPLICATION_OCTET_STREAM);
-			
+
+			if (isPofFund == true) {
+				InputStreamEntity reqEntity = new InputStreamEntity(new StringInputStream("{}"), -1,
+						ContentType.APPLICATION_OCTET_STREAM);
+
 				method.setEntity(reqEntity);
 			}
 
@@ -130,11 +133,12 @@ public class PofFundJob extends Job {
 	@Override
 	public void execute(Map<String, String> params) {
 		try {
-//			context = new ClassPathXmlApplicationContext("file:C:/dev/service/webspider-master/src/main/resources/applicationContext.xml");
+			// context = new
+			// ClassPathXmlApplicationContext("file:C:/dev/service/webspider-master/src/main/resources/applicationContext.xml");
 			context = new ClassPathXmlApplicationContext("applicationContext.xml");
 			service = context.getBean(PofFundService.class);
-			
-//			pofFundHandle();   //从基金入口
+
+			// pofFundHandle(); //从基金入口
 			aoinFundHandle();
 			pofHandle();
 
@@ -259,21 +263,22 @@ public class PofFundJob extends Job {
 
 	/**
 	 * 多次重试下载
+	 * 
 	 * @param url
 	 * @param referUrl
 	 * @param params
 	 * @return
 	 */
-	private JSONObject multipleDownload(String url,String referUrl,JsonObject params){
+	private JSONObject multipleDownload(String url, String referUrl, JsonObject params) {
 		threadSleep(randDom());
 		for (int i = 0; i < 5; i++) {
 			try {
-				String html = getJsonContent(url,referUrl,params);
+				String html = getJsonContent(url, referUrl, params);
 				JSONObject baseObject = JSONObject.parseObject(html);
 
 				return baseObject;
 			} catch (Exception e) {
-				logger.error("基金下载",e);
+				logger.error("基金下载", e);
 				threadSleep(randDom());
 			}
 		}
@@ -315,45 +320,45 @@ public class PofFundJob extends Job {
 		String url = "http://gs.amac.org.cn/amac-infodisc/res/pof/manager/";
 		for (PofList pofList : list) {
 			try {
-				logger.info("开始处理基金:"+pofList.getManagername());
-				
+				logger.info("开始处理基金:" + pofList.getManagername());
 
-				String html = HttpclientUtils.downloadHtmlRetry(url+pofList.getUrl());
-				if(html==null || "".equals(html)){
+				String html = HttpclientUtils.downloadHtmlRetry(url + pofList.getUrl());
+				if (html == null || "".equals(html)) {
 					continue;
 				}
 				Document doc = Jsoup.parse(html);
 				Elements baseTrs = doc.select("div[class=\"m-manager-list m-list-details\"] > table > tbody > tr");
 
-				PofInfo info = service .selectPofInfoByMananagerName(pofList.getManagername());
-				if(!this.needUpdate(info, doc)){
+				PofInfo info = service.selectPofInfoByMananagerName(pofList.getManagername());
+				if (!this.needUpdate(info, doc)) {
 					continue;
 				}
-				if(info == null){
+				if (info == null) {
 					info = new PofInfo();
 				}
-//				PofInfo info = new PofInfo();
+				// PofInfo info = new PofInfo();
 				this.newManagerHandle(info, baseTrs);
-				
+
 				pofList.setInfo(info);
 				service.updatePofList(pofList);
-				logger.info("基金:"+pofList.getManagername()+"处理完成!");
+				logger.info("基金:" + pofList.getManagername() + "处理完成!");
 			} catch (Exception e) {
 				logger.error("处理基金:" + pofList.getManagername() + " 异常", e);
 			}
 		}
 	}
-	
+
 	/**
 	 * 新的基金管理人 处理办法
+	 * 
 	 * @param info
 	 * @param baseTrs
 	 */
-	private void newManagerHandle(PofInfo info, Elements baseTrs){
-		if(null == info || baseTrs == null){
+	private void newManagerHandle(PofInfo info, Elements baseTrs) {
+		if (null == info || baseTrs == null) {
 			return;
 		}
-		
+
 		for (int i = 0; i < baseTrs.size(); i++) {
 			Element currentTr = baseTrs.get(i);
 			String title = currentTr.child(0).text();
@@ -445,18 +450,18 @@ public class PofFundJob extends Job {
 			}
 		}
 	}
-	
+
 	/**
-	 * 以前就有的基金管理人
-	 * 只更新基金列表
+	 * 以前就有的基金管理人 只更新基金列表
+	 * 
 	 * @param info
 	 * @param baseTrs
 	 */
-	private void oldManagerHandle(PofInfo info, Elements baseTrs){
-		if(null == info || baseTrs == null){
+	private void oldManagerHandle(PofInfo info, Elements baseTrs) {
+		if (null == info || baseTrs == null) {
 			return;
 		}
-		
+
 		for (int i = 0; i < baseTrs.size(); i++) {
 			Element currentTr = baseTrs.get(i);
 			String title = currentTr.child(0).text();
@@ -472,7 +477,7 @@ public class PofFundJob extends Job {
 					info.getInfoFunds().add(fund);
 				}
 
-			} 
+			}
 		}
 	}
 
@@ -524,7 +529,6 @@ public class PofFundJob extends Job {
 		return fund;
 	}
 
-
 	/** 一些通用方法 **/
 
 	/**
@@ -551,11 +555,11 @@ public class PofFundJob extends Job {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 私募基金处理，从私募基金入口
 	 */
-	public void pofFundHandle(){
+	public void pofFundHandle() {
 		logger.info("开始处理私募基金");
 
 		String url = "http://gs.amac.org.cn/amac-infodisc/api/pof/fund?rand=0.5135618324280553&page=%s&size=100";// page从0开始,size=100
@@ -569,7 +573,7 @@ public class PofFundJob extends Job {
 		isPofFund = true;
 		JSONObject baseObject = multipleDownload(String.format(url, 0), referUrl, params);
 		isPofFund = false;
-		
+
 		pofHandle(parsePofListFromFund(baseObject));
 
 		Integer totalPages = baseObject.getInteger("totalPages");
@@ -583,14 +587,15 @@ public class PofFundJob extends Job {
 				isPofFund = true;
 				baseObject = multipleDownload(String.format(url, i), referUrl, params);
 				isPofFund = false;
-				
+
 				pofHandle(parsePofListFromFund(baseObject));
 			}
 		}
 	}
-	
+
 	/**
 	 * 解析私募基金管理人从基金产品页
+	 * 
 	 * @param object
 	 * @return
 	 */
@@ -602,7 +607,7 @@ public class PofFundJob extends Job {
 			JSONObject item = datas.getJSONObject(i);
 
 			PofList model = new PofList();
-			
+
 			model.setManagername(item.getString("managerName"));
 			model.setUrl(item.getString("managerUrl").substring(11));
 
@@ -611,31 +616,31 @@ public class PofFundJob extends Job {
 
 		return list;
 	}
-	
-	private boolean needUpdate(PofInfo info, Document doc){
-		if(info == null){
+
+	private boolean needUpdate(PofInfo info, Document doc) {
+		if (info == null) {
 			return true;
 		}
-		
+
 		Elements baseTrs = doc.select("div[class=\"m-manager-list m-list-details\"] > table > tbody > tr");
-		
-		if(baseTrs != null){
+
+		if (baseTrs != null) {
 			for (int i = 0; i < baseTrs.size(); i++) {
 				Element currentTr = baseTrs.get(i);
 				String title = currentTr.child(0).text();
-	
+
 				String text = currentTr.children().size() > 1 ? currentTr.child(1).text() : null;
-				
-				if(title.contains("机构信息最后更新时间") && !StringUtil.isBlank(text)){
-					if(text.compareToIgnoreCase(info.getLastupdateddate()) > 0){
+
+				if (title.contains("机构信息最后更新时间")){
+					if (!StringUtil.isBlank(text) && text.compareToIgnoreCase(info.getLastupdateddate()) > 0) {
 						return true;
-					}else{
+					} else {
 						return false;
 					}
 				}
 			}
 		}
-		
-		return true;
+
+		return false;
 	}
 }
