@@ -28,6 +28,7 @@ import com.chinaventure.webspider.util.HttpclientFileUtils;
 import com.chinaventure.webspider.util.HttpclientUtils;
 import com.chinaventure.webspider.util.NumberUtil;
 import com.chinaventure.webspider.util.PropertiesUtil;
+import com.chinaventure.webspider.util.StringUtil;
 
 import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
@@ -93,8 +94,8 @@ public class ChoiceReportJob extends Job {
 
 			String savePath = params.get("savePath");
 
-			Integer start = Integer.parseInt(params.get("start"));
-			Integer end = Integer.parseInt(params.get("end"));
+			int start = StringUtil.parseInt(params.get("start"),0);
+			int end = StringUtil.parseInt(params.get("end"),999);
 
 			String Referer = "http://app.jg.eastmoney.com/html_Notice/index.html?LeftMenuId=F013";
 

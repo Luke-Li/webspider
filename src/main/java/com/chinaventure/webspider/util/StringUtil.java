@@ -4,8 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class StringUtil {
+	private static Log log = LogFactory.getLog(StringUtil.class);
 	
 	/**
 	 * 解码Unicode编码的字符串
@@ -138,4 +141,45 @@ public class StringUtil {
         }
         return c;
     }
+    
+    /**
+	 * 将给定字符串转为int型
+	 *
+	 * @param s
+	 * @param defaultValue
+	 *            转换失败时的默认值
+	 * @return
+	 */
+	public static int parseInt(String s, int defaultValue)
+	{
+		return parseInt(s, defaultValue, "");
+	}
+
+	/**
+	 * 将给定字符串转为int型
+	 *
+	 * @param s
+	 * @param defaultValue
+	 *            转换失败时的默认值
+	 * @param customLog
+	 *            转换失败时自定义log
+	 * @return
+	 */
+	public static int parseInt(String s, int defaultValue, String customLog)
+	{
+		int result = defaultValue;
+		try
+		{
+			result = Integer.parseInt(s);
+		}
+		catch (Exception e)
+		{
+			if (null != customLog && !"".equals(customLog))
+			{
+				log.debug(customLog);
+			}
+			result = defaultValue;
+		}
+		return result;
+	}
 }
