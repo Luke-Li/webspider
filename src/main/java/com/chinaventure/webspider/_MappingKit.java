@@ -12,6 +12,7 @@ import com.chinaventure.webspider.model.jfinal.ChoiceStockThirdboardSeed;
 import com.chinaventure.webspider.model.jfinal.OpsMonitorMedia;
 import com.chinaventure.webspider.model.jfinal.OpsMonitorMediaIndex;
 import com.chinaventure.webspider.model.jfinal.OpsMonitorWechat;
+import com.chinaventure.webspider.model.jfinal.StockSeed;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 
 public class _MappingKit {
@@ -29,6 +30,7 @@ public class _MappingKit {
 				arp.addMapping("choice_stock_thirdboard_seed",ChoiceStockThirdboardSeed.class);
 
 				arp.addMapping("choice_stock_biz_info","stock_code", ChoiceStockBizInfo.class);
+				arp.addMapping("stock_seed",StockSeed.class);
 
 //				arp.addMapping("dynamic_cookie", DynamicCookie.class);
 

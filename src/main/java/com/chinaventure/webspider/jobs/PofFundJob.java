@@ -139,7 +139,7 @@ public class PofFundJob extends Job {
 			service = context.getBean(PofFundService.class);
 
 			// pofFundHandle(); //从基金入口
-			aoinFundHandle();
+//			aoinFundHandle();
 			pofHandle();
 
 			logger.info("基金处理完成");

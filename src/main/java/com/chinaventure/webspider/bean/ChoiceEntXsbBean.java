@@ -65,7 +65,8 @@ public class ChoiceEntXsbBean {
 			{"ZengFa","http://app.jg.eastmoney.com/F9ThirdBoard/ZengFa.do?securityCode={0}&yearList=2017,2016,2015,2014&reportTypeList=1,5,3,6&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0&CurrencySelect=0",""},
 					   
 			//每股指标	
-			{"EachStockIndex","http://app.jg.eastmoney.com/F9ThirdBoard/EachStockIndex.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+//			{"EachStockIndex","http://app.jg.eastmoney.com/F9ThirdBoard/EachStockIndex.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"EachStockIndex","http://app.jg.eastmoney.com/F9Stock/EachStockIndex.do?securityCode={0}{1}&yearList=2017,2016,2015,2014&reportTypeList=1,5,3,6,7&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
 			//盈利能力与收益质量	
 			{"ProfitAndQuantity","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitAndQuantity.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//资本结构与偿债能力	

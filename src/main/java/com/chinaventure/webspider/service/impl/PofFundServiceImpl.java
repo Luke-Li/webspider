@@ -185,5 +185,9 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 	public PofInfo selectPofInfoByMananagerName(String managerName){
 		return pofInfoMapper.selectOne(new PofInfo(){{this.setManagername(managerName);}});
 	}
+	
+	public void test(){
+		pofInfoFundMapper.delete(new PofInfoFund(){{setPofInfoId(0);}});
+	}
 
 }
