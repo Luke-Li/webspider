@@ -1,12 +1,7 @@
 package com.chinaventure.webspider.model.jfinal;
 
 import com.chinaventure.webspider.JFConfig;
-import com.chinaventure.webspider.bean.ChoiceEntBean;
-import com.chinaventure.webspider.bean.ChoiceEntBeanBak;
-import com.chinaventure.webspider.bean.ChoiceEntBeanNew;
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
-import com.jfinal.plugin.activerecord.Record;
 
 public class StockSeed extends Model<StockSeed>{
 

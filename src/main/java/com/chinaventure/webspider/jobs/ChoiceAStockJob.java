@@ -4,11 +4,8 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -23,7 +20,6 @@ import org.zbus.broker.Broker;
 import org.zbus.broker.ZbusBroker;
 import org.zbus.mq.Consumer;
 import org.zbus.mq.Consumer.ConsumerHandler;
-import org.zbus.mq.Producer;
 import org.zbus.net.http.Message;
 
 import com.alibaba.fastjson.JSONArray;
@@ -33,7 +29,6 @@ import com.chinaventure.webspider.bean.ChoiceEntBean;
 import com.chinaventure.webspider.model.jfinal.ChoiceErrorLog;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockA;
 import com.chinaventure.webspider.model.jfinal.StockSeed;
-import com.chinaventure.webspider.service.impl.ZbusService;
 import com.chinaventure.webspider.util.FileUtil;
 import com.chinaventure.webspider.util.HttpclientUtils;
 import com.chinaventure.webspider.util.NumberUtil;

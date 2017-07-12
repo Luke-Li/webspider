@@ -1,46 +1,23 @@
 package com.chinaventure.webspider.jobs;
 
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.zbus.broker.Broker;
 import org.zbus.broker.ZbusBroker;
-import org.zbus.mq.Consumer;
-import org.zbus.mq.Consumer.ConsumerHandler;
 import org.zbus.mq.Producer;
 import org.zbus.net.http.Message;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.chinaventure.webspider.JFConfig;
-import com.chinaventure.webspider.bean.ChoiceEntBeanNew;
-import com.chinaventure.webspider.model.jfinal.ChoiceErrorLog;
-import com.chinaventure.webspider.model.jfinal.ChoiceStockANew;
-import com.chinaventure.webspider.model.jfinal.ChoiceStockASeed;
 import com.chinaventure.webspider.model.jfinal.StockSeed;
 import com.chinaventure.webspider.service.impl.ZbusService;
-import com.chinaventure.webspider.util.FileUtil;
 import com.chinaventure.webspider.util.HttpclientUtils;
-import com.chinaventure.webspider.util.NumberUtil;
 import com.chinaventure.webspider.util.PropertiesUtil;
-import com.chinaventure.webspider.util.StringUtil;
 import com.chinaventure.webspider.util.TimeUtil;
 import com.jfinal.plugin.activerecord.Db;
 
@@ -133,7 +110,7 @@ public class StockSeedJob extends Job {
 						JSONObject record = records.getJSONObject(j);
 						String date = record.getString("date");
 
-						if (currentDate.compareToIgnoreCase(date) > 0) {
+						if (currentDate.compareToIgnoreCase(date) == 0) {
 							nextPage = false;
 							break;//按时间倒序排就不需要continue,直接break
 						}
