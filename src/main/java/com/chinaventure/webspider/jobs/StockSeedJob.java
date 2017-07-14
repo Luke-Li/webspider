@@ -27,17 +27,12 @@ import sealion.core.Job;
 public class StockSeedJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
-	
-	public static String[] reportTypes = {
-			"T004001001",
-			"T004001002",
-			"T004001003",
-			"T004001004",
-			"T013001001",
-			"T013001002",
-			"T013001003",
-			"T013001004"
-	};
+
+	public static String[] reportTypes = { "T004001001", "T004001002", "T004001003", "T004001004", "T013001001",
+			"T013001002", "T013001003", "T013001004" };
+
+	public static String thirdBoardName = "ChoiceThirdboard";
+	public static String aStockName = "ChoiceAStock";
 
 	public static void main(String[] args) {
 		Map<String, String> params = new HashMap<>();
@@ -71,13 +66,17 @@ public class StockSeedJob extends Job {
 	public void execute(Map<String, String> params) {
 		try {
 			JFConfig.start();
-			Db.update("truncate stock_seed");
-			for(String type:reportTypes){
-				handleStock(type);
+			if (!StockSeed.dao.isSeedCrawled()) {
+				Db.update("truncate stock_seed");
+				for (String type : reportTypes) {
+					handleStock(type);
+				}
 			}
-			
-			addAStockQueue();
-			addXsbQueue();
+
+			addQueue(aStockName);
+			addQueue(thirdBoardName);
+
+			System.exit(0);
 
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -86,7 +85,7 @@ public class StockSeedJob extends Job {
 	}
 
 	/**
-	 * 处理逻辑
+	 * 处理逻辑 获取前一天的公告
 	 * 
 	 * @param stock
 	 */
@@ -94,7 +93,7 @@ public class StockSeedJob extends Job {
 		try {
 			String url = "http://app.jg.eastmoney.com/Notice/GetNoticeById.do?id=%s&pageIndex=%d&limit=20&sort=date&order=desc";
 			boolean nextPage = true;
-			String currentDate = TimeUtil.getDateBeforeDays(1);//获取一天以前的数据
+			String currentDate = TimeUtil.getDateBeforeDays(1);// 获取一天以前的数据
 			int page = 1;
 
 			while (nextPage) {
@@ -110,11 +109,16 @@ public class StockSeedJob extends Job {
 						JSONObject record = records.getJSONObject(j);
 						String date = record.getString("date");
 
-						if (currentDate.compareToIgnoreCase(date) == 0) {
+						if (currentDate.compareToIgnoreCase(date) > 0) {
+							// 时间已经比昨天早，直接break
 							nextPage = false;
-							break;//按时间倒序排就不需要continue,直接break
+							break;
+						} else if (currentDate.compareToIgnoreCase(date) < 0) {
+							// 时间比昨天新，暂不统计
+							continue;
 						}
 
+						// 时间就是昨天的
 						JSONArray secuList = record.getJSONArray("secuList");
 
 						for (int k = 0; k < secuList.size(); k++) {
@@ -136,58 +140,30 @@ public class StockSeedJob extends Job {
 		}
 
 	}
-	
+
 	/**
 	 * 加载A股种子到zbus
 	 */
-	public void addAStockQueue(){
-		
-		logger.info("开始加载A股种子");
-		String mpName = "ChoiceAStock";
+	public void addQueue(String mpName) {
+
+		logger.info("开始加载" + mpName + "种子");
 
 		try {
 			Broker broker = new ZbusBroker(PropertiesUtil.getProperty("zbus"));
 			Producer producer = new Producer(broker, mpName);
 			producer.createMQ();
 
-			if (ZbusService.mqLength(producer) < 5) {
+			if (ZbusService.mqLength(producer) < 1) {
 				logger.info("种子队列为空,可以进行初始化");
 
-				logger.info("正在加载种子");
-				List<StockSeed> list = StockSeed.dao.find(String.format("select id,code,name from %s where type=0", StockSeed.TableName));
-
-				if (null != list) {
-					for (StockSeed stock : list) {
-						Message msg = new Message();
-						msg.setBody(SerializationUtils.serialize(stock));
-
-						producer.sendSync(msg);
-					}
+				List<StockSeed> list = null;
+				if (aStockName.compareTo(mpName) == 0) {
+					list = StockSeed.dao.find(String.format("select id,code,name from %s where updated=0 and type=0",
+							StockSeed.TableName));
+				} else {
+					list = StockSeed.dao.find(String.format("select id,code,name from %s where updated=0 and type=1",
+							StockSeed.TableName));
 				}
-			}
-		} catch (Exception e) {
-			logger.error("初始化种子异常!", e);
-		}
-	}
-	
-	/**
-	 * 加载A股种子到zbus
-	 */
-	public void addXsbQueue(){
-		
-		logger.info("开始加载新三板种子");
-		String mpName = "ChoiceThirdboard";
-
-		try {
-			Broker broker = new ZbusBroker(PropertiesUtil.getProperty("zbus"));
-			Producer producer = new Producer(broker, mpName);
-			producer.createMQ();
-
-			if (ZbusService.mqLength(producer) < 5) {
-				logger.info("种子队列为空,可以进行初始化");
-
-				logger.info("正在加载种子");
-				List<StockSeed> list = StockSeed.dao.find(String.format("select id,code,name from %s where type=1", StockSeed.TableName));
 
 				if (null != list) {
 					for (StockSeed stock : list) {

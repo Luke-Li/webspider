@@ -1,6 +1,7 @@
 package com.chinaventure.webspider.model.jfinal;
 
 import com.chinaventure.webspider.JFConfig;
+import com.chinaventure.webspider.util.TimeUtil;
 import com.jfinal.plugin.activerecord.Model;
 
 public class StockSeed extends Model<StockSeed>{
@@ -53,6 +54,22 @@ public class StockSeed extends Model<StockSeed>{
 				}else{
 					return false;
 				}
+			}
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public boolean isSeedCrawled(){
+		try{
+			String storeDate = TimeUtil.getCurrentTime("yyyyMMdd");
+			String sql = String.format("select * from %s where createTime> ?",TableName);
+			StockSeed seed = dao.findFirst(sql,storeDate);
+			
+			if(seed == null){
+				return false;
+			}else{
+				return true;
 			}
 		}catch(Exception e){
 			return false;

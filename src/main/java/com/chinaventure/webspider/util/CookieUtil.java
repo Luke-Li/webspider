@@ -31,8 +31,8 @@ public class CookieUtil
             // File f = new
             // File(Paths.get(System.getProperty("user.dir"),"").toString());
             // System.out.println(f.getAbsolutePath());
-            pros.load(new FileInputStream(Paths.get(FileUtil.getProgramDirectory(), CONFIG_FILE).toString()));
-            // pros.load(PropertiesUtil.class.getClassLoader().getResourceAsStream(CONFIG_FILE));
+//            pros.load(new FileInputStream(Paths.get(FileUtil.getProgramDirectory(), CONFIG_FILE).toString()));
+             pros.load(PropertiesUtil.class.getClassLoader().getResourceAsStream(CONFIG_FILE));
             // 还有一种LOAD方式
             // ResourceBundle.getBundle("webspider.properties").getString("expectedInsertions")
         }

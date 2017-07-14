@@ -170,7 +170,6 @@ public class ChoiceAStockJob extends Job {
 		// 当前股票代码
 		String code = stock.getStr("code");
 
-//		ChoiceEntBean bean = new ChoiceEntBean();
 		ChoiceEntBean bean = new ChoiceEntBean();
 
 		for (String[] item : ChoiceEntBean.EntItems) {
@@ -180,6 +179,7 @@ public class ChoiceAStockJob extends Job {
 			String html = StringUtil.decodeUnicode(HttpclientUtils.downloadHtmlRetry(request));
 			if(html.contains("加载失败")){
 				logger.error("the cookie is timeout. please set a new one!");
+				logger.error(request.getCookies());
 				System.exit(1);
 			}
 			switch (name) {
