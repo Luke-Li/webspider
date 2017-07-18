@@ -139,11 +139,15 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 		info.setCreatetime(now);
 		info.setUpdatetime(now);
 		info.setPofId(pofList.getId());
-		
-		//先删除，再插入
-		pofInfoMapper.delete(new PofInfo(){{setPofId(pofList.getId());}});
+
+		// 先删除，再插入
+		pofInfoMapper.delete(new PofInfo() {
+			{
+				setPofId(pofList.getId());
+			}
+		});
 		pofInfoMapper.insert(info);
-		
+
 		// 高管履历
 		List<PofInfoLegalpersonResume> resumes = info.getPersonResumes();
 		for (PofInfoLegalpersonResume personResume : resumes) {
@@ -151,9 +155,13 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 			personResume.setUpdatetime(now);
 			personResume.setPofInfoId(info.getId());
 		}
-		
-		//先删除，再插入
-		legalpersonResumeMapper.delete(new PofInfoLegalpersonResume(){{setPofInfoId(info.getId());}});
+
+		// 先删除，再插入
+		legalpersonResumeMapper.delete(new PofInfoLegalpersonResume() {
+			{
+				setPofInfoId(info.getId());
+			}
+		});
 		if (resumes.size() > 0)
 			legalpersonResumeMapper.insertList(resumes);
 		// 高管情况
@@ -163,7 +171,11 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 			manager.setUpdatetime(now);
 			manager.setPofInfoId(info.getId());
 		}
-		pofInfoManagerMapper.delete(new PofInfoManager(){{setPofInfoId(info.getId());}});
+		pofInfoManagerMapper.delete(new PofInfoManager() {
+			{
+				setPofInfoId(info.getId());
+			}
+		});
 		if (managers.size() > 0)
 			pofInfoManagerMapper.insertList(managers);
 		// 基金信息
@@ -173,21 +185,36 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 			fund.setUpdatetime(now);
 			fund.setPofInfoId(info.getId());
 		}
-		pofInfoFundMapper.delete(new PofInfoFund(){{setPofInfoId(info.getId());}});
-		if (funds.size() > 0)
+
+		if (funds.size() > 0) {
+			pofInfoFundMapper.delete(new PofInfoFund() {
+				{
+					this.setPofmanagername(funds.get(0).getPofmanagername());
+				}
+			});
 			pofInfoFundMapper.insertList(funds);
+		}
 
 	}
+
 	/**
 	 * 获取基金信息
 	 */
 	@Override
-	public PofInfo selectPofInfoByMananagerName(String managerName){
-		return pofInfoMapper.selectOne(new PofInfo(){{this.setManagername(managerName);}});
+	public PofInfo selectPofInfoByMananagerName(String managerName) {
+		return pofInfoMapper.selectOne(new PofInfo() {
+			{
+				this.setManagername(managerName);
+			}
+		});
 	}
-	
-	public void test(){
-		pofInfoFundMapper.delete(new PofInfoFund(){{setPofInfoId(0);}});
+
+	public void test() {
+		pofInfoFundMapper.delete(new PofInfoFund() {
+			{
+				setPofInfoId(0);
+			}
+		});
 	}
 
 }

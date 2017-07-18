@@ -52,13 +52,7 @@ public class Consumer  {
     }
 
     public static void main(String args []){
-//    	new Consumer("test").doWork();
-    	String url = "http://app.jg.eastmoney.com/Notice/GetNoticeById.do?id=%s&pageIndex=%d&limit=20&sort=date&order=desc";
-    	int page = 10;
-    	while(page-- > 0){
-//    		url = String.format(url, "test",page);
-    		System.out.println(String.format(url, "test",page));
-    	}
+    	new Consumer("test").doWork();
     }
 
 }
