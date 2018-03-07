@@ -209,10 +209,11 @@ public class PofFundServiceImpl extends BaseService<PofList> implements PofFundS
 		});
 	}
 
+	@Override
 	public void test() {
 		pofInfoFundMapper.delete(new PofInfoFund() {
 			{
-				setPofInfoId(0);
+				setPofInfoId(13053);
 			}
 		});
 	}

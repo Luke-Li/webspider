@@ -24,6 +24,10 @@ import com.jfinal.plugin.activerecord.Db;
 import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
 
+/**
+ * 种子抓取列表。首先抓取需要更新的A股和新三板种子列表，保存到stock_seed。
+ * 同时把种子放到zbus队列中，运行hoiceAStockJob和ChoiceXsbJob去更新
+ */
 public class StockSeedJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
@@ -93,7 +97,8 @@ public class StockSeedJob extends Job {
 		try {
 			String url = "http://app.jg.eastmoney.com/Notice/GetNoticeById.do?id=%s&pageIndex=%d&limit=20&sort=date&order=desc";
 			boolean nextPage = true;
-			String currentDate = TimeUtil.getDateBeforeDays(1);// 获取一天以前的数据
+//			String currentDate = TimeUtil.getDateBeforeDays(1);// 获取一天以前的数据
+			String currentDate = "2017-08-07";
 			int page = 1;
 
 			while (nextPage) {

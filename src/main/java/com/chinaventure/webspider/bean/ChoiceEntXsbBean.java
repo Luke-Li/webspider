@@ -23,14 +23,14 @@ public class ChoiceEntXsbBean {
 			{"SimpleAnalysis","http://app.jg.eastmoney.com/html_f9_ThirdBoard/simpleAnalysis.html?securityCode={0}",""},
 			
 			//参控股子公司	
-			{"EquityCnotrolledCompany","http://app.jg.eastmoney.com/F9ThirdBoard/GetEquityCnotrolledCompanyList.do?securityCode={0}{1}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"EquityCnotrolledCompany","http://app.jg.eastmoney.com/F9ThirdBoard/GetEquityCnotrolledCompanyList.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//股本结构	
-			{"StockStructure","http://app.jg.eastmoney.com/F9ThirdBoard/GetStockStructureList.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"StockStructure","http://app.jg.eastmoney.com/F9ThirdBoard/GetStockStructureList.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			
 			//十大股东明细 HTML格式	
-			{"Top10Holder","http://app.jg.eastmoney.com/F9ThirdBoard/GetTop10HolderListForHTML.do?securityCode={0}{1}&yearList=2017,2016,2015,2014,2013&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"Top10Holder","http://app.jg.eastmoney.com/F9ThirdBoard/GetTop10HolderListForHTML.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
 			//10大流通股东 HTML格式	
-			{"Top10CirculationShareHolder","http://app.jg.eastmoney.com/F9ThirdBoard/GetTop10CirculationShareHolder.do?securityCode={0}{1}&yearList=2017,2016,2015,2014,2013&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"Top10CirculationShareHolder","http://app.jg.eastmoney.com/F9ThirdBoard/GetTop10CirculationShareHolder.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014,2013&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			
 			//董事会(现任)	
 			{"ManagerInfoType1","http://app.jg.eastmoney.com/F9ThirdBoard/getManagerInfo.do?securityCode={0}&type=1&yearList=undefined,undefined&dateSearchType=3&=0&rotate=1&seperate=0&order=asc&cashType=0&exchangeValue=0",""},
@@ -42,57 +42,57 @@ public class ChoiceEntXsbBean {
 			{"ManagerInfoType4","http://app.jg.eastmoney.com/F9ThirdBoard/getManagerInfo.do?securityCode={0}&type=4&yearList=undefined,undefined&dateSearchType=3&=0&rotate=1&seperate=0&order=asc&cashType=0&exchangeValue=0",""},
 			
 			//每日行情数据统计		
-			{"DailyMarketData","http://app.jg.eastmoney.com/F9ThirdBoard/GetDailyMarketDataListForReport.do?securityCode={0}{1}&yearList=2017,2016,2015,2014&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=1&customSelect=0",""},
+			{"DailyMarketData","http://app.jg.eastmoney.com/F9ThirdBoard/GetDailyMarketDataListForReport.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=1&customSelect=0",""},
 
 			//资产负债 1:普通报表  2:销售百分比 3：资产百分比  4:同比增长率
-			{"AssetDebtOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
-			{"AssetDebtSales","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
-			{"AssetDebtAssets","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=3&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=3&CurrencySelect=0",""},
-			{"AssetDebtGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=4&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=4&CurrencySelect=0",""},
+			{"AssetDebtOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
+			{"AssetDebtSales","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
+			{"AssetDebtAssets","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=3&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=3&CurrencySelect=0",""},
+			{"AssetDebtGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/AssetDebt.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1,2,3,4&reportType=4&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=4&CurrencySelect=0",""},
 
 			//利润表   1:普通报表  2:销售百分比 3:同比增长率			
-			{"ProfitTableOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
-			{"ProfitTableSales","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
-			{"ProfitTableGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=3&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=3&CurrencySelect=0",""},
+			{"ProfitTableOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
+			{"ProfitTableSales","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
+			{"ProfitTableGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitTable.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=3&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=3&CurrencySelect=0",""},
 			
 			//现金流量表   1:普通报表  2:同比增长率							  
-			{"CashFlowTableOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlowTable.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
-			{"CashFlowTableGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlowTable.do?securityCode={0}{1}&companyType=&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
+			{"CashFlowTableOrdinary","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlowTable.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1&CurrencySelect=0",""},
+			{"CashFlowTableGrowth","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlowTable.do?securityCode={0}{1}&companyType=&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&listedType=0,1&reportTypeInScope=1&reportType=2&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=2&CurrencySelect=0",""},
 
 			//分红	
-			{"ShareRed","http://app.jg.eastmoney.com/F9ThirdBoard/ShareRed.do?securityCode={0}{1}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0",""},
+			{"ShareRed","http://app.jg.eastmoney.com/F9ThirdBoard/ShareRed.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0",""},
 			//增发	
-			{"ZengFa","http://app.jg.eastmoney.com/F9ThirdBoard/ZengFa.do?securityCode={0}&yearList=2017,2016,2015,2014&reportTypeList=1,5,3,6&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0&CurrencySelect=0",""},
+			{"ZengFa","http://app.jg.eastmoney.com/F9ThirdBoard/ZengFa.do?securityCode={0}&yearList=2018,2017,2016,2015&reportTypeList=1,5,3,6&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0&CurrencySelect=0",""},
 					   
 			//每股指标	
-//			{"EachStockIndex","http://app.jg.eastmoney.com/F9ThirdBoard/EachStockIndex.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
-			{"EachStockIndex","http://app.jg.eastmoney.com/F9Stock/EachStockIndex.do?securityCode={0}{1}&yearList=2017,2016,2015,2014&reportTypeList=1,5,3,6,7&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
+//			{"EachStockIndex","http://app.jg.eastmoney.com/F9ThirdBoard/EachStockIndex.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"EachStockIndex","http://app.jg.eastmoney.com/F9Stock/EachStockIndex.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014&reportTypeList=1,5,3,6,7&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
 			//盈利能力与收益质量	
-			{"ProfitAndQuantity","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitAndQuantity.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"ProfitAndQuantity","http://app.jg.eastmoney.com/F9ThirdBoard/ProfitAndQuantity.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//资本结构与偿债能力	
-			{"CapitalAndRepay","http://app.jg.eastmoney.com/F9ThirdBoard/CapitalAndRepay.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"CapitalAndRepay","http://app.jg.eastmoney.com/F9ThirdBoard/CapitalAndRepay.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//营运能力	
-			{"BussinessAbility","http://app.jg.eastmoney.com/F9ThirdBoard/BussinessAbilityModel.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"BussinessAbility","http://app.jg.eastmoney.com/F9ThirdBoard/BussinessAbilityModel.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//成长能力	
-			{"GrowthAbility","http://app.jg.eastmoney.com/F9ThirdBoard/GrowthAbility.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"GrowthAbility","http://app.jg.eastmoney.com/F9ThirdBoard/GrowthAbility.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//现金流量	
-			{"CashFlow","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlow.do?securityCode={0}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"CashFlow","http://app.jg.eastmoney.com/F9ThirdBoard/CashFlow.do?securityCode={0}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//杜邦分析	
-			{"DuBangAnaysis","http://app.jg.eastmoney.com/F9ThirdBoard/DuBangAnaysis.do?securityCodeAndName={0}[]&securityCode=430211&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
+			{"DuBangAnaysis","http://app.jg.eastmoney.com/F9ThirdBoard/DuBangAnaysis.do?securityCodeAndName={0}[]&securityCode=430211&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&=0&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0",""},
 			//单季度财务指标											
-			{"SingleMonthFinanceIndex","http://app.jg.eastmoney.com/F9ThirdBoard/SingleMonthFinanceIndex.do?securityCode={0}{1}&yearList=2017,2016,2015,2014,2013&reportTypeList=1,2,3,4&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
+			{"SingleMonthFinanceIndex","http://app.jg.eastmoney.com/F9ThirdBoard/SingleMonthFinanceIndex.do?securityCode={0}{1}&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,2,3,4&dateSearchType=1&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=0&CurrencySelect=0",""},
 			//所属行业
 			{"IndustryInfo","http://app.jg.eastmoney.com/F9ThirdBoard/GetIndustryInfo.do?securityCode={0}&yearList=undefined,undefined&dateSearchType=3&industryType=2&rotate=0&seperate=0&order=desc&cashType=0&exchangeValue=0&customSelect=2",""},
 			
 			//财务数据-主营构成
 			//按项目名称展示
-			{"MainBusinessStructReport_ProjectName","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&rotate=2&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&type=%E4%BA%A7%E5%93%81&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=%E4%BA%A7%E5%93%81",""},
+			{"MainBusinessStructReport_ProjectName","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&rotate=2&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&type=%E4%BA%A7%E5%93%81&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=%E4%BA%A7%E5%93%81",""},
 			//按行业分类
-			{"MainBusinessStructReport_Industy","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E8%A1%8C%E4%B8%9A&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""},
+			{"MainBusinessStructReport_Industy","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E8%A1%8C%E4%B8%9A&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""},
 			//按产品(项目)分类
-			{"MainBusinessStructReport_Product","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E4%BA%A7%E5%93%81&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""},
+			{"MainBusinessStructReport_Product","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E4%BA%A7%E5%93%81&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""},
 			//按地区分类
-			{"MainBusinessStructReport_Area","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E5%9C%B0%E5%8C%BA&yearList=2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""}
+			{"MainBusinessStructReport_Area","http://app.jg.eastmoney.com/F9ThirdBoard/MainBusinessStructReport.do?securityCode={0}{1}&type=%E5%9C%B0%E5%8C%BA&yearList=2018,2017,2016,2015,2014,2013&reportTypeList=1,5,3,6&dateSearchType=1&method=1&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=1",""}
 	};
 	
 	/**

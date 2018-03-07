@@ -131,7 +131,7 @@
 		<dependency>
 			<groupId>org.zbus</groupId>
 			<artifactId>zbus</artifactId>
-			<version>6.3.0</version>
+			<version>6.3.4</version>
 		</dependency>
 		<!--spring-aop依赖 -->
 		<dependency>

@@ -221,22 +221,26 @@ public class ChoiceClientJobKafka extends Job {
 
 			switch (name) {
 			case "info":
-				JSONArray array = JSONArray.parseArray(html);
-				bean.setInfo(array);
+				Map<String, Object> map = new HashMap<String, Object>();
+				Object tmp = JSONArray.parse(html);
+				map = (Map<String,Object>)tmp;
+				Map<String,Object> basicInfo = (Map<String,Object>)map.get("companyInfo");
+				String entName = (String)basicInfo.get("COMPANYNAME");
 				bean.setCode(code);
-				bean.setName(array.getJSONObject(0).getString("col1"));
+				bean.setName(entName);
 				bean.setCreateTime(new Date());
 				bean.setUpdateTime(new Date());
+				bean.setInfo(html);
 				break;
-			case "name_history":
-				setInfo(bean, html, "曾用名");
-				break;
-			case "ManageAnalysis":
-				setInfo(bean, html, "经营分析");
-				break;
-			case "SimpleAnalysis":
-				setInfo(bean, html, "简史");
-				break;
+//			case "name_history":
+//				setInfo(bean, html, "曾用名");
+//				break;
+//			case "ManageAnalysis":
+//				setInfo(bean, html, "经营分析");
+//				break;
+//			case "SimpleAnalysis":
+//				setInfo(bean, html, "简史");
+//				break;
 
 			case "EquityCnotrolledCompany":
 				bean.EquityCnotrolledCompany = html;// 参控股公司
@@ -382,14 +386,14 @@ public class ChoiceClientJobKafka extends Job {
 		logger.info(MessageFormat.format("end download code :{0}  name:{1}!", code, stock.getStr("name")));
 	}
 
-	private void setInfo(ChoiceEntBean bean, String html, String fieldName) {
-		bean.getInfo().forEach(b -> {
-			JSONObject o = (JSONObject) b;
-			if (StringUtils.equalsIgnoreCase(o.getString("col0"), fieldName)) {
-				o.put("col1", html);
-			}
-		});
-	}
+//	private void setInfo(ChoiceEntBean bean, String html, String fieldName) {
+//		bean.getInfo().forEach(b -> {
+//			JSONObject o = (JSONObject) b;
+//			if (StringUtils.equalsIgnoreCase(o.getString("col0"), fieldName)) {
+//				o.put("col1", html);
+//			}
+//		});
+//	}
 
 	/**
 	 * 把TABLE解析成JSON字符串格式

@@ -46,9 +46,9 @@ public class JFConfig{
     public static void start(String database) {
         // mysql
         //String configName = PropKit.get("db.configName");
-        String url = String.format("jdbc:mysql://10.26.252.50:3306/%s?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true",database);//PropKit.get("jdbcUrl");
-        String username = "rdd";//PropKit.get("user");
-        String password = "s6eN8HZTg9Sgr2kD";//PropKit.get("password");
+        String url = String.format("jdbc:mysql://172.19.155.27:3306/%s?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true",database);//PropKit.get("jdbcUrl");
+        String username = "dataProduct";//PropKit.get("user");
+        String password = "dataProduct753";//PropKit.get("password");
         String driverClass = "com.mysql.jdbc.Driver";//PropKit.get("driverClass");
         String filters = "stat,wall";//PropKit.get("filters");
 

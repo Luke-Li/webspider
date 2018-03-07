@@ -41,7 +41,7 @@ import sealion.core.Job;
 
 /**
  * 这个处理类是在choiceClientXsbJob上进行修改，根据年报的发布日期
- * 去抓取更新企业信息
+ * 去抓取更新新三板企业信息，数据写到choice_stock_thirdboard
  * @author luke
  *
  */
@@ -113,6 +113,7 @@ public class ChoiceXsbJob extends Job {
 					handleStock(stock);
 				}
 			});
+			
 			
 			/**
 			 * 如果队列不为空，阻止线程退出

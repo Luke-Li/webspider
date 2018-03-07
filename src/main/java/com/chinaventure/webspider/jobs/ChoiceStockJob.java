@@ -30,6 +30,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.chinaventure.webspider.JFConfig;
+import com.chinaventure.webspider.bean.ChoiceEntBean;
 import com.chinaventure.webspider.bean.ChoiceEntBeanNew;
 import com.chinaventure.webspider.model.jfinal.ChoiceErrorLog;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockANew;
@@ -44,6 +45,9 @@ import com.chinaventure.webspider.util.StringUtil;
 import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
 
+/**
+ * 测试用的，数据将写到choice_stock_a_new
+ */
 public class ChoiceStockJob extends Job {
 
 	Logger logger = Logger.getLogger(getClass());
@@ -234,7 +238,7 @@ public class ChoiceStockJob extends Job {
 //		ChoiceEntBeanNew bean = new ChoiceEntBeanNew();
 		ChoiceEntBeanNew bean = new ChoiceEntBeanNew();
 
-		for (String[] item : ChoiceEntBeanNew.EntItems) {
+		for (String[] item : ChoiceEntBean.EntItems) {
 			String name = item[0], url = item[1], referfer = item[2];
 
 			Downloader.Request request = getChoiceRequest(url, referfer, code);

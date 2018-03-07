@@ -3,8 +3,9 @@ package com.test.spider;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import com.chinaventure.webspider.JFConfig;
-import com.chinaventure.webspider.jobs.ChoiceClientJob;
-import com.chinaventure.webspider.model.jfinal.ChoiceStockASeed;
+import com.chinaventure.webspider.jobs.ChoiceAStockJob;
+import com.chinaventure.webspider.model.jfinal.StockSeed;
+
 import sealion.core.Job;
 
 public class ChoiceTestJob extends Job {
@@ -13,11 +14,11 @@ public class ChoiceTestJob extends Job {
 
 	public static void main(String[] args) {
 		JFConfig.start();
-		ChoiceStockASeed stock = new ChoiceStockASeed();
-		stock.set("code","300376");
-		stock.set("name", "易事特");
+		StockSeed stock = new StockSeed();
+		stock.set("code","300650.SZ");
+		stock.set("name", "太龙照明");
 		
-		new ChoiceClientJob().handleStock(stock);
+		new ChoiceAStockJob().handleStock(stock);
 	}
 
 	@Override

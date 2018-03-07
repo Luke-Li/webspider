@@ -34,4 +34,6 @@ public interface PofFundService {
 	 */
 	PofInfo selectPofInfoByMananagerName(String managerName);
 	
+	void test();
+	
 }

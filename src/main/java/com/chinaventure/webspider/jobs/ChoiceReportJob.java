@@ -34,9 +34,10 @@ import net.kernal.spiderman.worker.download.Downloader;
 import sealion.core.Job;
 
 /**
- * Choice报告的监测JOB
+ * Choice报告的监测JOB，
+ * 数据写到ChoiceReportBasic和ChoiceReportType
  * 
- * @author Administrator
+ * @author Luke
  *
  */
 public class ChoiceReportJob extends Job {
@@ -185,15 +186,15 @@ public class ChoiceReportJob extends Job {
 					}
 
 					logger.info(String.format("开始处理报告: %s", record.getString("title")));
-					String[] attachParams = downloadAttach(record, entiry.typeUrl, savePath);
+//					String[] attachParams = downloadAttach(record, entiry.typeUrl, savePath); //这里可以不用下载到本地
 
 					if (entiry.typeId < 30) {
 						ChoiceReportBasic basic = new ChoiceReportBasic();
 
-						basic.set("attachment", attachParams[3]);
-						basic.set("file_size", attachParams[0]);
-						basic.set("pagenum", attachParams[1]);
-						basic.set("url", attachParams[2]);
+//						basic.set("attachment", attachParams[3]);
+//						basic.set("file_size", attachParams[0]);
+//						basic.set("pagenum", attachParams[1]);
+						basic.set("url", entiry.typeUrl);
 
 						basic.set("importLevel", record.getInteger("importLevel"));
 						basic.set("report_date", record.getString("date"));
@@ -230,10 +231,10 @@ public class ChoiceReportJob extends Job {
 					} else {
 						ChoiceReportType model = new ChoiceReportType();
 
-						model.set("attachment", attachParams[3]);
-						model.set("file_size", attachParams[0]);
-						model.set("pagenum", attachParams[1]);
-						model.set("url", attachParams[2]);
+//						model.set("attachment", attachParams[3]);
+//						model.set("file_size", attachParams[0]);
+//						model.set("pagenum", attachParams[1]);
+						model.set("url",entiry.typeUrl);
 
 						// 作者处理
 						JSONArray authorList = record.getJSONArray("authorList");
