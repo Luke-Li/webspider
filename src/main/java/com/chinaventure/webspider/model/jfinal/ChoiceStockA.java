@@ -24,7 +24,7 @@ public class ChoiceStockA extends Model<ChoiceStockA>{
 		model.set("code", bean.getCode());
 		model.set("name",bean.getName());
 		model.set("cookie",bean.getCookie());
-		model.set("info",bean.getInfo());
+		model.set("info",bean.getInfo().toJSONString());
 		model.set("EquityCnotrolledCompany",bean.EquityCnotrolledCompany);
 		model.set("StockStructure",bean.StockStructure);
 		model.set("Top10Holder",bean.Top10Holder);

@@ -13,8 +13,8 @@ public class ChoiceEntBean {
 	 */
 	public static String[][] EntItems = {
 			//公司简介
-//			{"info","http://app.jg.eastmoney.com/F9Stock/GetCompanyIntroductionInfo.do?securityCode={0}&yearList=undefined,undefined&dateSearchType=3&=0&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0",""},
-			{"info","http://app.jg.eastmoney.com/F9Stock/Index.do?securityCode={0}","http://app.jg.eastmoney.com/F9Stock/GetWindowIndustryRankData.do?securityCode={0}.{1}&industry="},
+			{"info","http://app.jg.eastmoney.com/F9Stock/GetCompanyIntroductionInfo.do?securityCode={0}&yearList=undefined,undefined&dateSearchType=3&=0&rotate=0&seperate=0&order=desc&cashType=1&exchangeValue=1&customSelect=0",""},
+//			{"info","http://app.jg.eastmoney.com/F9Stock/Index.do?securityCode={0}","http://app.jg.eastmoney.com/F9Stock/GetWindowIndustryRankData.do?securityCode={0}.{1}&industry="},
 			//曾用名
 			{"name_history","http://app.jg.eastmoney.com/F9Stock/GetCompanyNameHistoryList.do?securityCode={0}&rotate=0","http://app.jg.eastmoney.com/html_f9/companyNameHistory.html?securityCode={0}"},
 			//经营分析
@@ -325,7 +325,7 @@ public String MainBusinessStructReport_Area;
     /**
      * 公司基本信息
      */
-    private String info;
+    private JSONArray info;
     
    
 
@@ -401,11 +401,11 @@ public String MainBusinessStructReport_Area;
         this.updateTime = updateTime;
     }
     
-    public String getInfo() {
+    public JSONArray getInfo() {
 		return info;
 	}
 
-	public void setInfo(String entInfo) {
+	public void setInfo(JSONArray entInfo) {
 		this.info = entInfo;
 	}
 	

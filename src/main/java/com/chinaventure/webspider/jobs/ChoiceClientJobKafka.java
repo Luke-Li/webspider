@@ -230,7 +230,7 @@ public class ChoiceClientJobKafka extends Job {
 				bean.setName(entName);
 				bean.setCreateTime(new Date());
 				bean.setUpdateTime(new Date());
-				bean.setInfo(html);
+//				bean.setInfo(html);
 				break;
 //			case "name_history":
 //				setInfo(bean, html, "曾用名");

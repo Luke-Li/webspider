@@ -15,8 +15,8 @@ public class ChoiceTestJob extends Job {
 	public static void main(String[] args) {
 		JFConfig.start();
 		StockSeed stock = new StockSeed();
-		stock.set("code","300650.SZ");
-		stock.set("name", "太龙照明");
+		stock.set("code","300373.SZ");
+		stock.set("name", "扬杰科技");
 		
 		new ChoiceAStockJob().handleStock(stock);
 	}

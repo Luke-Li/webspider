@@ -28,7 +28,6 @@ import com.chinaventure.webspider.JFConfig;
 import com.chinaventure.webspider.bean.ChoiceEntBean;
 import com.chinaventure.webspider.model.jfinal.ChoiceErrorLog;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockA;
-import com.chinaventure.webspider.model.jfinal.ChoiceStockANew;
 import com.chinaventure.webspider.model.jfinal.StockSeed;
 import com.chinaventure.webspider.util.FileUtil;
 import com.chinaventure.webspider.util.HttpclientUtils;
@@ -188,18 +187,14 @@ public class ChoiceAStockJob extends Job {
 			}
 			switch (name) {
 			case "info":
-				Map<String, Object> map = new HashMap<String, Object>();
-				Object tmp = JSONArray.parse(html);
-				map = (Map<String,Object>)tmp;
-				Map<String,Object> basicInfo = (Map<String,Object>)map.get("companyInfo");
-				String entName = (String)basicInfo.get("COMPANYNAME");
+				JSONArray array = JSONArray.parseArray(html);
+				bean.setInfo(array);
 				bean.setCode(code);
-				bean.setName(entName);
+				bean.setName(array.getJSONObject(0).getString("col1"));
 				bean.setCreateTime(new Date());
 				bean.setUpdateTime(new Date());
-				bean.setInfo(html);
 				break;
-				/*case "name_history":
+			case "name_history":
 				setInfo(bean, html, "曾用名");
 				break;
 			case "ManageAnalysis":
@@ -207,8 +202,7 @@ public class ChoiceAStockJob extends Job {
 				break;
 			case "SimpleAnalysis":
 				setInfo(bean, html, "简史");
-				break;*/
-
+				break;
 			case "EquityCnotrolledCompany":
 				bean.EquityCnotrolledCompany = html;// 参控股公司
 				break;
@@ -355,14 +349,14 @@ public class ChoiceAStockJob extends Job {
 		logger.info(MessageFormat.format("end download code :{0}  name:{1}!", code, stock.getStr("name")));
 	}
 
-//	private void setInfo(ChoiceEntBean bean, String html, String fieldName) {
-//		bean.getInfo().forEach(b -> {
-//			JSONObject o = (JSONObject) b;
-//			if (StringUtils.equalsIgnoreCase(o.getString("col0"), fieldName)) {
-//				o.put("col1", html);
-//			}
-//		});
-//	}
+	private void setInfo(ChoiceEntBean bean, String html, String fieldName) {
+		bean.getInfo().forEach(b -> {
+			JSONObject o = (JSONObject) b;
+			if (StringUtils.equalsIgnoreCase(o.getString("col0"), fieldName)) {
+				o.put("col1", html);
+			}
+		});
+	}
 
 	/**
 	 * 把TABLE解析成JSON字符串格式
