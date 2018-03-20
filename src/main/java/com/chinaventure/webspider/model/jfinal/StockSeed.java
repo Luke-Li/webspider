@@ -15,15 +15,18 @@ public class StockSeed extends Model<StockSeed>{
 	
 	public void addSeed(String name, String code){
 		if(!isStored(code)){
-			StockSeed seed = new StockSeed();
-			seed.set("code", code);
-			seed.set("name", name);
-			if(code.contains("SH") || code.contains("SZ")){
-				seed.set("type", 0);//A股
-			}else{
-				seed.set("type", 1);//三版
+			StockSeed seed = StockSeed.dao.findFirst("select * from stock_seed where name=? and code=?",name,code);
+			if(seed == null){
+				seed = new StockSeed();
+				seed.set("code", code);
+				seed.set("name", name);
+				if(code.contains("SH") || code.contains("SZ")){
+					seed.set("type", 0);//A股
+				}else{
+					seed.set("type", 1);//三版
+				}
+				seed.save();
 			}
-			seed.save();
 		}
 	}
 	

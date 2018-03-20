@@ -70,12 +70,12 @@ public class ChoiceReportJob extends Job {
 	/**
 	 * 队列名称-主板
 	 */
-	String mpNameAStock = "Choice-AStock";
+	String mpNameAStock = "ChoiceAStock";
 	Producer producerAStock = null;
 	/**
 	 * 队列名称-新三板
 	 */
-	String mpNameThirboard = "Choice-Thirdboard";
+	String mpNameThirboard = "ChoiceThirdboard";
 	Producer producerThirboard = null;
 
 	@Override

@@ -97,8 +97,8 @@ public class StockSeedJob extends Job {
 		try {
 			String url = "http://app.jg.eastmoney.com/Notice/GetNoticeById.do?id=%s&pageIndex=%d&limit=20&sort=date&order=desc";
 			boolean nextPage = true;
-//			String currentDate = TimeUtil.getDateBeforeDays(1);// 获取一天以前的数据
-			String currentDate = "2017-08-07";
+			String currentDate = TimeUtil.getDateBeforeDays(1);// 获取一天以前的数据
+			// String currentDate = "2018-03-10";
 			int page = 1;
 
 			while (nextPage) {
@@ -114,24 +114,25 @@ public class StockSeedJob extends Job {
 						JSONObject record = records.getJSONObject(j);
 						String date = record.getString("date");
 
-						if (currentDate.compareToIgnoreCase(date) > 0) {
+						if (currentDate.compareToIgnoreCase(date) >= 0) {
 							// 时间已经比昨天早，直接break
 							nextPage = false;
 							break;
 						} else if (currentDate.compareToIgnoreCase(date) < 0) {
 							// 时间比昨天新，暂不统计
 							continue;
-						}
+						} else {
 
-						// 时间就是昨天的
-						JSONArray secuList = record.getJSONArray("secuList");
+							// 时间就是昨天的
+							JSONArray secuList = record.getJSONArray("secuList");
 
-						for (int k = 0; k < secuList.size(); k++) {
-							JSONObject secu = secuList.getJSONObject(k);
-							String secuName = secu.getString("secuSName");
-							String secuCode = secu.getString("secuFullCode");
+							for (int k = 0; k < secuList.size(); k++) {
+								JSONObject secu = secuList.getJSONObject(k);
+								String secuName = secu.getString("secuSName");
+								String secuCode = secu.getString("secuFullCode");
 
-							StockSeed.dao.addSeed(secuName, secuCode);
+								StockSeed.dao.addSeed(secuName, secuCode);
+							}
 						}
 
 					}
