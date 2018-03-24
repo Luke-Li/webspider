@@ -24,6 +24,7 @@ import com.chinaventure.webspider.model.jfinal.ChoiceReportBasic;
 import com.chinaventure.webspider.model.jfinal.ChoiceReportType;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockASeed;
 import com.chinaventure.webspider.model.jfinal.ChoiceStockThirdboardSeed;
+import com.chinaventure.webspider.model.jfinal.StockSeed;
 import com.chinaventure.webspider.util.HttpclientFileUtils;
 import com.chinaventure.webspider.util.HttpclientUtils;
 import com.chinaventure.webspider.util.NumberUtil;
@@ -224,7 +225,8 @@ public class ChoiceReportJob extends Job {
 																		// 新三板
 																		// 沪深股票公告->定期报告
 																		// A股
-							intoZbus(basic);
+//							intoZbus(basic);//大乾以前的
+							intoZbusStockSeed(basic);
 						}
 
 						basic.save();
@@ -317,6 +319,35 @@ public class ChoiceReportJob extends Job {
 
 					producerAStock.sendSync(msg);
 				}
+			} catch (Exception e) {
+				logger.error("zbus入队列", e);
+			}
+		}
+	}
+	
+	private void intoZbusStockSeed(ChoiceReportBasic basic) {
+		String code = basic.getStr("secuFullCode");
+		String name = basic.getStr("secuSName");
+		Integer type = basic.getInt("type");
+
+		if (!unIntoZbus.containsKey(code)) {
+			unIntoZbus.put(code, basic);
+			try {
+				Message msg = new Message();
+				StockSeed stock = new StockSeed();
+				stock.set("code", code);
+				stock.set("name", name);
+				
+				if (type == 1) {
+					stock.set("type", 1);
+					msg.setBody(SerializationUtils.serialize(stock));
+					producerThirboard.sendSync(msg);
+				} else if (type == 12) {
+					stock.set("type", 0);
+					msg.setBody(SerializationUtils.serialize(stock));
+					producerAStock.sendSync(msg);
+				}
+				stock.save();
 			} catch (Exception e) {
 				logger.error("zbus入队列", e);
 			}

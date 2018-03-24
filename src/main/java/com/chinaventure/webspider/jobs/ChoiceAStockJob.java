@@ -110,8 +110,11 @@ public class ChoiceAStockJob extends Job {
 			consumer.start(new ConsumerHandler() {
 				@Override
 				public void handle(Message msg, Consumer consumer){
-					StockSeed stock = SerializationUtils.deserialize(msg.getBody());
-					handleStock(stock);
+					Object obj = SerializationUtils.deserialize(msg.getBody());
+					if(obj instanceof StockSeed){
+						StockSeed stock = SerializationUtils.deserialize(msg.getBody());
+						handleStock(stock);
+					}
 				}
 			});
 
